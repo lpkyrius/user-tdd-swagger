@@ -4,5 +4,17 @@
     "userId": "533b7681-b1c3-4244-8a37-423ae7a3d8ac",
     "summary": "Initial task summary #1 - from repository",
     "created_at": "2023-12-24T16:17:18.622Z"
+  },
+  {
+    "userId": "943b7681-b1c3-4244-8a37-423ae7a3d7bc",
+    "summary": "Updating user laptop Zoom app.",
+    "id": "c64ec1e4-1918-41e7-9baf-ede974c60ebc",
+    "created_at": "2024-02-02T18:40:30.935Z"
+  },
+  {
+    "userId": "943b7681-b1c3-4244-8a37-423ae7a3d7bc",
+    "summary": "Updating user laptop Zoom app and updating the main OS system.",
+    "id": "c5837a83-601a-4250-bddc-3ff60a1d02f2",
+    "created_at": "2024-02-02T18:40:44.698Z"
   }
 ]

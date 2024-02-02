@@ -1,6 +1,5 @@
-import { v4 as uuid } from "uuid";
+import crypto from 'crypto';
 import * as fs from 'fs';
-import path from 'path';
 import { Task } from "../../entities/Task";
 import { ITaskRepository } from "../ITaskRepository";
 import { ManageTaskTestFile } from "./ManageTaskTestFile";
@@ -15,7 +14,7 @@ class TasksRepositoryInMemory implements ITaskRepository {
 
   async add(task: Task): Promise<Task> {
     const tasks = this.readTasksFromFile();
-    const newTask = { ...task, id: uuid(), created_at: new Date(new Date().toISOString()) };
+    const newTask = { ...task, id: crypto.randomUUID(), created_at: new Date(new Date().toISOString()) };
     tasks.push(newTask);
     this.writeTasksToFile(tasks);
     return newTask;

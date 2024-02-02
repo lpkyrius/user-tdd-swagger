@@ -11,6 +11,8 @@
 
 ##### This phase
 
+- [ ] Persist data with MySQL for tasks;
+- [ ] Persist data with MySQL for users;
 - [ ] Users authentication;
 
 
@@ -18,8 +20,3 @@
 
 - New Repo for:
     - JWT;
-
-##### Next phase
-
-- [ ] New Repo for:
-    - Persist data with MySQL or Postgres repository;
