@@ -2,7 +2,7 @@ import { expect, describe, jest, test, beforeAll } from '@jest/globals';
 import { Task } from '../entities/Task';
 import { ITaskRepository } from '../repository/ITaskRepository';
 import { TaskService } from './TaskService';
-import { TasksRepositoryInMemory } from '../repository/in-memory/TasksRepositoryInMemory';
+import { TasksRepositoryInMemory } from '../repository/in-memory/tasks/TasksRepositoryInMemory';
 
 describe('#taskService', () => {
 

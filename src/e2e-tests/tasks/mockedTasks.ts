@@ -1,5 +1,3 @@
-import { Task } from "../entities/Task";
-
 const mockedTasks = [
   {
     "id": "500994c6-b51b-4544-8dfb-ccced2b87e73",

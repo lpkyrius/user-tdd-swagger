@@ -1,11 +1,11 @@
 import { expect, describe, jest, test, beforeAll } from '@jest/globals';
 import request from 'supertest';
-import app from '../app';
+import app from '../../app';
 import * as fs from 'fs';
 import path from 'path';
 import { mockedTasks } from './mockedTasks';
-import { Task } from '../entities/Task';
-import { ManageTaskTestFile } from '../repository/in-memory/ManageTaskTestFile';
+import { Task } from '../../entities/Task';
+import { ManageTaskTestFile } from '../../repository/in-memory/tasks/ManageTaskTestFile';
 
 // Mock console.log and console.error globally for the entire test suite
 // So we keep a clear console when tests should return error 

@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import * as fs from 'fs';
-import { Task } from "../../entities/Task";
-import { ITaskRepository } from "../ITaskRepository";
+import { Task } from "../../../entities/Task";
+import { ITaskRepository } from "../../ITaskRepository";
 import { ManageTaskTestFile } from "./ManageTaskTestFile";
 class TasksRepositoryInMemory implements ITaskRepository {
 

@@ -1,9 +1,9 @@
 import * as fs from 'fs';
 import path from 'path';
-import { mockedTasks } from '../../e2e-tests/mockedTasks';
+import { mockedUsers } from '../../../e2e-tests/users/mockedUsers';
 
-class ManageTaskTestFile {
-  private readonly filePath: string = path.resolve(__dirname) + '/TaskFile.JSON';
+class ManageUserTestFile {
+  private readonly filePath: string = path.resolve(__dirname) + '/UserFile.JSON';
 
   constructor() {
     this.newFile();
@@ -12,10 +12,10 @@ class ManageTaskTestFile {
   async newFile() {
     try {
       if (!fs.existsSync(this.filePath)) {
-        await fs.promises.writeFile(this.filePath, JSON.stringify(mockedTasks));
+        await fs.promises.writeFile(this.filePath, JSON.stringify(mockedUsers));
       }
     } catch (error) {
-      console.error('Error creating file TaskFile.JSON:', error);
+      console.error('Error creating file UserFile.JSON:', error);
       throw error;
     }
   }
@@ -33,10 +33,10 @@ class ManageTaskTestFile {
     try {
       await fs.promises.unlink(this.filePath);
     } catch (error) {
-      console.error('Error deleting file TaskFile.JSON:', error);
+      console.error('Error deleting file UserFile.JSON:', error);
       throw error;
     }
   }
 }
 
-export { ManageTaskTestFile };
+export { ManageUserTestFile };

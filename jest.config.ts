@@ -4,7 +4,7 @@ export default {
   // clearMocks: true,
   preset: 'ts-jest',
   rootDir: 'src/',
-  testMatch: ['**/**/*.test.ts'],
+  testMatch: ['**/src/**/*.test.ts'],
   coveragePathIgnorePatterns: [
       'node_modules',
       'test-config',
