@@ -11,12 +11,25 @@
 
 ##### This phase
 
-- [ ] Persist data with MySQL for tasks;
-- [ ] Persist data with MySQL for users;
-- [ ] Users authentication;
-
+- [ ] Implement user class (not integrated yet)
+    - [ ] TDD
+    - [ ] User Entity
+    - [ ] User Interface
+    - [ ] ManagerUserTestFile
+    - [ ] User Repository In-Memory (Start with the methods signature only)
+    - [ ] Services - UserService
+    - [ ] Controller - UserService
+    - [ ] Router - UserService
 
 ##### Next phase
 
-- New Repo for:
-    - JWT;
+> ⭐️ Save the UUID keys in database as binary type
+
+- [ ] Persist data with MySQL
+    - Factory following the new persist repository;
+    - Create the persistent repository only with the methods signature;
+    - TDD is already done since I made it for in-memory repository;
+
+##### Next phase
+
+- [ ] Integrate Users authentication (JWT) for Tasks management;
