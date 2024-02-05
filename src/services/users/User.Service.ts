@@ -18,6 +18,10 @@ class UserService {
         return await this.userRepository.add({ email, role });
     }
 
+    async list(): Promise<User[]> {
+        return await this.userRepository.list();
+    }
+
 }
 
 export { UserService };

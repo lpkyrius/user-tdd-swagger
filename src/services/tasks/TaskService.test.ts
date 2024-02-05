@@ -42,6 +42,7 @@ describe('#taskService', () => {
 
       expect(result).toBe(true);
       expect(task).toHaveProperty('id');
+      expect(task).toHaveProperty('created_at');
       expect(task.summary).toBe('Test summary created with unit test.');
     });
 
@@ -64,7 +65,6 @@ describe('#taskService', () => {
       expect(tasks).toBeInstanceOf(Array);
       expect(tasks).toEqual(taskStructure);
     });
-
   });
 
   describe('#Update Tasks', () => {

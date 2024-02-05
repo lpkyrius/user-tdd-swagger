@@ -6,6 +6,11 @@ import { ManageTaskTestFile } from './ManageTaskTestFile';
 global.console.log = jest.fn();
 global.console.error = jest.fn();
 
+beforeAll( async () => {
+  const manageTaskTestFile = new ManageTaskTestFile();
+  await manageTaskTestFile.resetFile();
+})
+
 beforeEach(() => {
   jest.resetAllMocks()
   jest.clearAllMocks()

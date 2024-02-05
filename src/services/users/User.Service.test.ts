@@ -4,15 +4,23 @@ import { IUserRepository } from '../../repository/in-memory/IUserRepository';
 import { UserService } from './User.Service';
 import { UserRepositoryInMemory } from '../../repository/in-memory/users/UserRepositoryInMemory';
 
-
 describe('#UserService', () =>{
 
     let userRepository: IUserRepository;
     let userService: UserService;
+    const userStructure = expect.arrayContaining([
+        expect.objectContaining({
+            id: expect.any(String),
+            email: expect.any(String),
+            role: expect.any(String),
+            created_at: expect.any(String),
+        }),
+    ]);
 
     beforeAll(() => {
         userRepository = new UserRepositoryInMemory();
         userService = new UserService(userRepository);
+        
     });
     
     describe('#UserExist', () => {
@@ -26,18 +34,26 @@ describe('#UserService', () =>{
     describe('#CreateUser', () => {
         it('should be able to create a new user and confirm it exists', async () => {
             const user: User = {
-                "email": "peter.tech@gmail.com",
-                "role": "2"
-            }
+                'email': 'peter.tech@gmail.com',
+                'role': '2'
+            };
+            const resultUser = await userService.add(user);
+            const result = await userService.exist(resultUser.id!);
 
-            const result = await userService.add(user);
-
-            console.log(result)
+            expect(result).toBeTruthy();
+            expect(user.email).toEqual('peter.tech@gmail.com')
         })
     })
 
     describe('#ListUser', () => {
-        it.todo('should receive an array of users')
+        let users: User[]; 
+
+        it('should receive an array of tasks', async () => {
+            users = await userService.list();
+
+            expect(users).toBeInstanceOf(Array);
+            expect(users).toEqual(userStructure);
+        })
     })
 
     describe('#UpdateUser', () => {
