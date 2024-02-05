@@ -1,14 +1,11 @@
-import { Task } from "../entities/Task";
-import { ITaskRepository } from "../repository/ITaskRepository"
+import { Task } from "../../entities/Task";
+import { ITaskRepository } from "../../repository/in-memory/ITaskRepository"
 
 interface IAddTaskRequest {
   userId: string;
   summary: string;
 };
-interface IEditTaskRequest {
-  id: string;
-  summary: string;
-};
+
 class TaskService {
   constructor(private taskRepository: ITaskRepository) {}
 
@@ -39,6 +36,4 @@ class TaskService {
 
 }
 
-export { 
-  TaskService,
- };
+export { TaskService };

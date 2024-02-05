@@ -111,10 +111,10 @@ describe('#E2E tests for tasks.', () => {
             .expect('Content-Type', /json/)
             .expect(200);
 
-      const taskExpected: Task = Object.assign({}, response.body.slice(-1)[0]);
+      const testTask: Task = Object.assign({}, response.body.slice(-1)[0]);
       
       const responseFind = await request(app)
-          .get('/task/find/'+ taskExpected.id)
+          .get('/task/find/'+ testTask.id)
           .expect('Content-Type', /json/)
           .expect(200);
         
@@ -141,17 +141,17 @@ describe('#E2E tests for tasks.', () => {
             .expect('Content-Type', /json/)
             .expect(200);
 
-      const taskExpected: Task = Object.assign({}, response.body.slice(-1)[0]);
-      taskExpected.summary = 'Updating task summary with this info!';
+      const testTask: Task = Object.assign({}, response.body.slice(-1)[0]);
+      testTask.summary = 'Updating task summary with this info!';
       
       const responseUpdate = await request(app)
 
-          .put('/task/update/'+ taskExpected.id)
-          .send(taskExpected)
+          .put('/task/update/'+ testTask.id)
+          .send(testTask)
           .expect('Content-Type', /json/)
           .expect(200);
 
-          expect(responseUpdate.body).toEqual(taskExpected);
+          expect(responseUpdate.body).toEqual(testTask);
     });
 
     test('It should respond with 400 bad request when trying to update with a summary larger than 100 characters.', async () => {
@@ -161,14 +161,14 @@ describe('#E2E tests for tasks.', () => {
             .expect('Content-Type', /json/)
             .expect(200);
 
-      const taskExpected: Task = Object.assign({}, response.body.slice(-1)[0]);
+      const testTask: Task = Object.assign({}, response.body.slice(-1)[0]);
 
-      taskExpected.summary = repeatedSummary.repeat(101);
+      testTask.summary = repeatedSummary.repeat(101);
 
       const responseUpdate = await request(app)
 
-          .put('/task/update/'+ taskExpected.id)
-          .send(taskExpected)
+          .put('/task/update/'+ testTask.id)
+          .send(testTask)
           .expect('Content-Type', /json/)
           .expect(400);
 
@@ -181,13 +181,13 @@ describe('#E2E tests for tasks.', () => {
             .expect('Content-Type', /json/)
             .expect(200);
       
-      const taskExpected: Task = Object.assign({}, response.body.slice(-1)[0]);
-      taskExpected.id = 'this.id.should.not.exist';
+      const testTask: Task = Object.assign({}, response.body.slice(-1)[0]);
+      testTask.id = 'this.id.should.not.exist';
 
       const responseUpdate = await request(app)
 
-          .put('/task/update/'+ taskExpected.id)
-          .send(taskExpected)
+          .put('/task/update/'+ testTask.id)
+          .send(testTask)
           .expect('Content-Type', /json/)
           .expect(404);
 

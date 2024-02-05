@@ -1,6 +1,6 @@
 import { expect, describe, jest, test, beforeAll } from '@jest/globals';
 import { TasksRepositoryInMemory } from './TasksRepositoryInMemory';
-import { ITaskRepository } from '../../ITaskRepository';
+import { ITaskRepository } from '../ITaskRepository';
 
 
 describe('#taskService', () => {
@@ -27,7 +27,7 @@ describe('#taskService', () => {
       const testDel = async function () {
         return await tasksRepository.delete('this.id.should.not.exist');
       }
-      expect(await testDel()).toBeFalsy;
+      expect(await testDel()).toBeFalsy();
     });
   });
 

@@ -1,4 +1,4 @@
-import { TaskService } from "../services/TaskService";
+import { TaskService } from "../services/tasks/TaskService";
 import { TaskController } from "../routes/tasks/TaskController";
 import { TasksRepositoryInMemory } from "../repository/in-memory/tasks/TasksRepositoryInMemory";
 

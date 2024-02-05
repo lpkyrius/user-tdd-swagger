@@ -1,4 +1,4 @@
-import { Task } from "../entities/Task";
+import { Task } from "../../entities/Task";
 
 export interface ITaskRepository {
   add(task: Task): Promise<Task>;

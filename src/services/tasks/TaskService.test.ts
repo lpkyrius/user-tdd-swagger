@@ -1,8 +1,8 @@
-import { expect, describe, jest, test, beforeAll } from '@jest/globals';
-import { Task } from '../entities/Task';
-import { ITaskRepository } from '../repository/ITaskRepository';
+import { expect, describe, beforeAll } from '@jest/globals';
+import { Task } from '../../entities/Task';
+import { ITaskRepository } from '../../repository/in-memory/ITaskRepository';
 import { TaskService } from './TaskService';
-import { TasksRepositoryInMemory } from '../repository/in-memory/tasks/TasksRepositoryInMemory';
+import { TasksRepositoryInMemory } from '../../repository/in-memory/tasks/TasksRepositoryInMemory';
 
 describe('#taskService', () => {
 
@@ -19,12 +19,12 @@ describe('#taskService', () => {
 
     it('should return false when check if a non-existent task exists', async () => {
       const checkTask = {
-        id: '123abc',
+        id: 'this.id.does.not.exist',
         summary: 'Test summary not existent task.',
       };
-      const expected: boolean = await taskService.exist(checkTask.id!);
+      const result: boolean = await taskService.exist(checkTask.id!);
 
-      expect(expected).toBe(false);
+      expect(result).toBe(false);
     });
   });
 
@@ -38,9 +38,9 @@ describe('#taskService', () => {
       };
 
       task = await taskService.add(taskData);
-      const expected: boolean = await taskService.exist(task.id!);
+      const result: boolean = await taskService.exist(task.id!);
 
-      expect(expected).toBe(true);
+      expect(result).toBe(true);
       expect(task).toHaveProperty('id');
       expect(task.summary).toBe('Test summary created with unit test.');
     });
@@ -49,7 +49,7 @@ describe('#taskService', () => {
   
   describe('#List Tasks', () => {
     let tasks: Task[]; 
-    const expectedStructure = expect.arrayContaining([
+    const taskStructure = expect.arrayContaining([
       expect.objectContaining({
         id: expect.any(String),
         userId: expect.any(String),
@@ -62,13 +62,13 @@ describe('#taskService', () => {
       tasks = await taskService.list();
 
       expect(tasks).toBeInstanceOf(Array);
-      expect(tasks).toEqual(expectedStructure);
+      expect(tasks).toEqual(taskStructure);
     });
 
   });
 
   describe('#Update Tasks', () => {
-    let task: Task, updatedTask: Task; 
+    let task: Task, result: Task; 
 
     it('should be able to update an existent task', async () => {
       const taskData = {
@@ -78,13 +78,13 @@ describe('#taskService', () => {
 
       task = await taskService.add(taskData);
 
-      let taskExpected: Task = Object.assign({}, task);
-      taskExpected.summary = 'Test summary already updated!!!';
+      let updatedTask: Task = Object.assign({}, task);
+      updatedTask.summary = 'Test summary already updated!!!';
 
-      updatedTask = await taskService.update(taskExpected);
+      result = await taskService.update(updatedTask);
 
-      expect(updatedTask).toHaveProperty('id');
-      expect(updatedTask.summary).toBe('Test summary already updated!!!');
+      expect(result).toHaveProperty('id');
+      expect(result.summary).toBe('Test summary already updated!!!');
     });
     
     it('should throw an error when updating a non-existing task on TaskService', async () => {
@@ -108,21 +108,21 @@ describe('#taskService', () => {
       };
 
       const task: Task = await taskService.add(taskData);
-      const expectedBefore: boolean = await taskService.exist(task.id!);
+      const resultBefore: boolean = await taskService.exist(task.id!);
 
       const deletedTask = await taskService.delete(task.id!);
-      const expectedAfter: boolean = await taskService.exist(task.id!);
+      const resultAfter: boolean = await taskService.exist(task.id!);
 
       expect(deletedTask).toBeTruthy;
-      expect(expectedBefore).toBe(true);
-      expect(expectedAfter).toBe(false);
+      expect(resultBefore).toBe(true);
+      expect(resultAfter).toBe(false);
     });
 
     it('should return false when deleting a non-existing task on TaskService', async () => {
       const testDel = async function () {
         return await taskService.delete('this.id.should.not.exist');
       }
-      expect(await testDel()).toBeFalsy;
+      expect(await testDel()).toBeFalsy();
     });
 
   });
