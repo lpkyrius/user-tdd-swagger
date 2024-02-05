@@ -1,6 +1,5 @@
-
 import { UserService } from "../services/users/User.Service";
-// UserController
+import { UserController } from "../routes/users/UserController";
 import { UserRepositoryInMemory } from "../repository/in-memory/users/UserRepositoryInMemory";
 
 export default class UserFactory {
