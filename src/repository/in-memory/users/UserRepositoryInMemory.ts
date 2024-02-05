@@ -14,12 +14,12 @@ class UserRepositoryInMemory {
     }
 
     async add(user: User): Promise<User> {
-        // const tasks = this.readTasksFromFile();
-        // const newTask = { ...task, id: crypto.randomUUID(), created_at: new Date(new Date().toISOString()) };
-        // tasks.push(newTask);
-        // this.writeTasksToFile(tasks);
-        // return newTask;
-        return user;
+        const users = this.readUsersFromFile();
+        const newUser = { ...user, id: crypto.randomUUID(), created_at: new Date(new Date().toISOString()) };
+        users.push(newUser);
+        this.writeUsersToFile(users);
+        
+        return newUser;
     }
 
     async update(user: User): Promise<User> {

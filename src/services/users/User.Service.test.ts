@@ -24,7 +24,16 @@ describe('#UserService', () =>{
     })
 
     describe('#CreateUser', () => {
-        it.todo('should be able to create a new user and confirm it exists')
+        it('should be able to create a new user and confirm it exists', async () => {
+            const user: User = {
+                "email": "peter.tech@gmail.com",
+                "role": "2"
+            }
+
+            const result = await userService.add(user);
+
+            console.log(result)
+        })
     })
 
     describe('#ListUser', () => {

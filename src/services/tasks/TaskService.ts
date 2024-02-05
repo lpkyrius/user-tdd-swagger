@@ -10,8 +10,7 @@ class TaskService {
   constructor(private taskRepository: ITaskRepository) {}
 
   async add({ userId, summary }: IAddTaskRequest) {
-    const taskCreate = { userId, summary };
-    return await this.taskRepository.add(taskCreate);
+    return await this.taskRepository.add({ userId, summary });
   }
 
   async update(taskToUpdate: Task): Promise<Task> {

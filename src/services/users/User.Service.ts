@@ -12,7 +12,11 @@ class UserService {
 
     async exist(id: string): Promise<boolean> {
         return await this.userRepository.exists(id);
-      }
+    }
+
+    async add({ email, role }: IAddUserRequest) {
+        return await this.userRepository.add({ email, role });
+    }
 
 }
 
