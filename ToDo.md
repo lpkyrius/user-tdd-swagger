@@ -12,15 +12,14 @@
 ##### This phase
 
 - [ ] Implement user class (not integrated yet)
-    - [ ] TDD
     - [x] User Entity
     - [x] User Interface
     - [x] Mocked Users
-    - [x] ManagerUserTestFile
-    - [x] User Repository In-Memory (Start with the methods signature only)
-    - [x] Services - UserService
-    - [ ] Controller - UserService
-    - [ ] Router - UserService
+    - [x] TDD ManagerUserTestFile
+    - [x] TDD User Repository In-Memory (Start with the methods signature only)
+    - [x] TDD Services - UserService
+    - [ ] TDD Controller - UserService
+    - [ ] TDD Router - UserService
 
 ##### Next phase
 

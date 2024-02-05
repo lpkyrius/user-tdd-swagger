@@ -4,7 +4,7 @@ import { User } from '../../../entities/User';
 import { IUserRepository } from '../IUserRepository';
 import { ManageUserTestFile } from './ManageUserTestFile';
 
-class UserRepositoryInMemory {
+class UserRepositoryInMemory implements IUserRepository {
 
     private readonly filePath: string;
 
@@ -68,8 +68,8 @@ class UserRepositoryInMemory {
         return JSON.parse(fileData);
     }
 
-    private writeUsersToFile(tasks: User[]): void {
-        fs.writeFileSync(this.filePath, JSON.stringify(tasks, null, 2));
+    private writeUsersToFile(users: User[]): void {
+        fs.writeFileSync(this.filePath, JSON.stringify(users, null, 2));
     }
 
 }
