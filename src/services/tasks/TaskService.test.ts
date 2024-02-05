@@ -67,6 +67,28 @@ describe('#taskService', () => {
     });
   });
 
+  describe('#Find Tasks', () => {
+    let task: Task;
+
+    it('should find an existent task', async () => {
+      const taskData = {
+        userId: '533b7681-b1c3-4244-8a37-423ae7a3d8ac',
+        summary: 'Test summary to be found',
+      };
+
+      task = await taskService.add(taskData);
+      const taskFound: Task = await taskService.findById(task.id!);
+
+      expect(taskFound.summary).toEqual('Test summary to be found')
+    });
+
+    it('should throw an error when trying to find a non-existing task on TaskService', async () => {
+      await expect(async () => {
+        const findTaskError: Task = await taskService.findById('this.id.should.not.exist');
+      }).rejects.toThrow('Id not found');
+    });
+  });
+
   describe('#Update Tasks', () => {
     let task: Task, result: Task; 
 

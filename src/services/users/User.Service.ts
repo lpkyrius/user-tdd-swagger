@@ -30,6 +30,10 @@ class UserService {
         return await this.userRepository.list();
     }
 
+    async findById(id: string): Promise<User> {
+        return await this.userRepository.findUserById(id);
+    }
+
 }
 
 export { UserService };

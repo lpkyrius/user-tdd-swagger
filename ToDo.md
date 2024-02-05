@@ -17,8 +17,8 @@
     - [x] User Interface
     - [x] Mocked Users
     - [x] ManagerUserTestFile
-    - [ ] User Repository In-Memory (Start with the methods signature only)
-    - [ ] Services - UserService
+    - [x] User Repository In-Memory (Start with the methods signature only)
+    - [x] Services - UserService
     - [ ] Controller - UserService
     - [ ] Router - UserService
 

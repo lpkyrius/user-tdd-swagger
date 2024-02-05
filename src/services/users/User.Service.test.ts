@@ -57,6 +57,29 @@ describe('#UserService', () =>{
         })
     })
 
+    describe('#Find User', () => {
+        let user: User;
+    
+        it('should find an existent user', async () => {
+            let user: User, result: User; 
+            const userData = {
+                email: 'manager.to.find@email.com',
+                role: '1',
+            };
+
+            user = await userService.add(userData);
+            const userFound: User = await userService.findById(user.id!);
+    
+          expect(userFound.email).toEqual('manager.to.find@email.com')
+        });
+    
+        it('should throw an error when trying to find a non-existing user on UserService', async () => {
+          await expect(async () => {
+            const findUserError: User = await userService.findById('this.id.should.not.exist');
+          }).rejects.toThrow('Id not found');
+        });
+      });
+
     describe('#UpdateUser', () => {
         it('should be able to update an existent user', async () => {
             let user: User, result: User; 

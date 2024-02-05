@@ -55,19 +55,12 @@ class UserRepositoryInMemory {
     }
 
     async findUserById(id: string): Promise<User> {
-        // const tasks = this.readTasksFromFile();
-        // const index = tasks.findIndex((t) => t.id === id);
-        // if (index !== -1) {
-        // return tasks[index];
-        // }
-        // throw new Error('Id not found');
-        const user: User = {
-            "id": "533b7681-b1c3-4244-8a37-423ae7a3d8ac",
-            "email": "john@gmail.com",
-            "role": "1",
-            "created_at": new Date(new Date().toISOString())
-          };
-        return user;
+        const users = this.readUsersFromFile();
+        const index = users.findIndex((u) => u.id === id);
+        if (index !== -1) {
+            return users[index];
+        }
+        throw new Error('Id not found');
     }
 
     private readUsersFromFile(): User[] {
