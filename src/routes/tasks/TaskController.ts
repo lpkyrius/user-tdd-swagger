@@ -34,7 +34,7 @@ class TaskController {
     }
   }
 
-  async httpFindById(req: Request, res: Response) {
+  async httpFindTaskById(req: Request, res: Response) {
     try {
       const id = req.params.id;
       if (!id)
@@ -47,7 +47,7 @@ class TaskController {
 
       return res.status(200).json(await this.taskService.findById(id));
     } catch (error: any) {
-      console.error(`httpFindById Error-> ${error}`);
+      console.error(`httpFindTaskById Error-> ${error}`);
       res.status(500).json({error: 'error attempting to find the task'});
     }
   }

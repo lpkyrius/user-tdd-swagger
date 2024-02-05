@@ -20,6 +20,7 @@
     - [x] TDD Services - UserService
     - [ ] TDD Controller - UserService
     - [ ] TDD Router - UserService
+    - [ ] Swagger update - add User process
 
 ##### Next phase
 
