@@ -37,9 +37,10 @@ describe('#UserService', () =>{
                 'email': 'peter.tech@gmail.com',
                 'role': '2'
             };
-            const resultUser = await userService.add(user);
-            const result = await userService.exist(resultUser.id!);
+            const addedUser = await userService.add(user);
+            const result = await userService.exist(addedUser.id!);
 
+            expect(addedUser).toHaveProperty('id');
             expect(result).toBeTruthy();
             expect(user.email).toEqual('peter.tech@gmail.com')
         })
@@ -48,7 +49,7 @@ describe('#UserService', () =>{
     describe('#ListUser', () => {
         let users: User[]; 
 
-        it('should receive an array of tasks', async () => {
+        it('should receive an array of users', async () => {
             users = await userService.list();
 
             expect(users).toBeInstanceOf(Array);
@@ -57,11 +58,60 @@ describe('#UserService', () =>{
     })
 
     describe('#UpdateUser', () => {
-        it.todo('should be able to update an existent user')
+        it('should be able to update an existent user', async () => {
+            let user: User, result: User; 
+            const userData = {
+                email: 'manager.to.update@email.com',
+                role: '1',
+            };
+
+            user = await userService.add(userData);
+
+            let updatedUser: User = Object.assign({}, user);
+            updatedUser.email = 'manager.updated@email.com';
+
+            result = await userService.update(updatedUser);
+
+            expect(result.email).toBe('manager.updated@email.com');
+        })
+
+        it('should throw an error when updating a non-existing user on UserService', async () => {
+        const userError: User = {
+            id: 'this.id.should.not.exist',
+            email: 'this.user.does.not.exist@email.com',
+            role: '1',
+        };
+        await expect(async () => {
+            const updatedUserError: User = await userService.update(userError);
+        }).rejects.toThrow('user not found');
+        });
     })
 
     describe('#DeleteUser', () => {
-        it.todo('should be able to delete an existent user')
-    })
- 
-})
+        it('should be able to delete an existent user', async () => {
+            const userData = {
+                email: 'manager.to.create@email.com',
+                role: '1',
+            };
+        
+            const user: User = await userService.add(userData);
+            const existNewUser: boolean = await userService.exist(user.id!);
+    
+            const userDeleted = await userService.delete(user.id!);
+            const existAfterDelete: boolean = await userService.exist(user.id!);
+    
+            expect(userDeleted).toBeTruthy;
+            expect(existNewUser).toBe(true);
+            expect(existAfterDelete).toBe(false);
+        });
+        
+        it('should return false when deleting a non-existing user on UserService', async () => {
+            const testDel = async function () {
+                return await userService.delete('this.id.should.not.exist');
+            }
+            expect(await testDel()).toBeFalsy();
+        });
+        
+    });
+        
+});

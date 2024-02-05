@@ -18,6 +18,14 @@ class UserService {
         return await this.userRepository.add({ email, role });
     }
 
+    async update(userToUpdate: User): Promise<User> {
+        return await this.userRepository.update(userToUpdate);
+    }
+
+    async delete(id: string): Promise<boolean> {
+        return await this.userRepository.delete(id);
+    }
+
     async list(): Promise<User[]> {
         return await this.userRepository.list();
     }

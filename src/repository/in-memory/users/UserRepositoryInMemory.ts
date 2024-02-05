@@ -18,31 +18,30 @@ class UserRepositoryInMemory {
         const newUser = { ...user, id: crypto.randomUUID(), created_at: new Date(new Date().toISOString()) };
         users.push(newUser);
         this.writeUsersToFile(users);
-        
+
         return newUser;
     }
 
     async update(user: User): Promise<User> {
-        // const tasks = this.readTasksFromFile();
-        // const index = tasks.findIndex((t) => t.id === task.id);
-        // if (index !== -1) {
-        // tasks[index] = task;
-        // this.writeTasksToFile(tasks);
-        // return task;
-        // }
-        // throw new Error('task not found');
+        const users = this.readUsersFromFile();
+        const index = users.findIndex((u) => u.id === user.id);
+        if (index !== -1) {
+            users[index] = user;
+        this.writeUsersToFile(users);
         return user;
+        }
+        throw new Error('user not found');
     }
 
     async delete(id: string): Promise<boolean> {
-        // const tasks = this.readTasksFromFile();
-        // const initialLength = tasks.length;
-        // const filteredTasks = tasks.filter((t) => t.id !== id);
-        // if (filteredTasks.length !== initialLength) {
-        // this.writeTasksToFile(filteredTasks);
-        return true;
-        // }
-        // return false;
+        const users = this.readUsersFromFile();
+        const initialLength = users.length;
+        const filteredUsers = users.filter((u) => u.id !== id);
+        if (filteredUsers.length !== initialLength) {
+            this.writeUsersToFile(filteredUsers);
+            return true;
+        }
+        return false;
     }
 
     async exists(id: string): Promise<boolean> {

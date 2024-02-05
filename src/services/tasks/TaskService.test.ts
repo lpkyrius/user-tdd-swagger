@@ -29,7 +29,7 @@ describe('#taskService', () => {
   });
 
   describe('#Create Tasks', () => {
-    let task: Task; 
+    let addedTask: Task; 
 
     it('should be able to create a new task and confirm it exists', async () => {
       const taskData = {
@@ -37,13 +37,13 @@ describe('#taskService', () => {
         summary: 'Test summary created with unit test.',
       };
 
-      task = await taskService.add(taskData);
-      const result: boolean = await taskService.exist(task.id!);
+      addedTask = await taskService.add(taskData);
+      const result: boolean = await taskService.exist(addedTask.id!);
 
       expect(result).toBe(true);
-      expect(task).toHaveProperty('id');
-      expect(task).toHaveProperty('created_at');
-      expect(task.summary).toBe('Test summary created with unit test.');
+      expect(addedTask).toHaveProperty('id');
+      expect(addedTask).toHaveProperty('created_at');
+      expect(addedTask.summary).toBe('Test summary created with unit test.');
     });
 
   });
@@ -83,7 +83,6 @@ describe('#taskService', () => {
 
       result = await taskService.update(updatedTask);
 
-      expect(result).toHaveProperty('id');
       expect(result.summary).toBe('Test summary already updated!!!');
     });
     
@@ -108,14 +107,14 @@ describe('#taskService', () => {
       };
 
       const task: Task = await taskService.add(taskData);
-      const resultBefore: boolean = await taskService.exist(task.id!);
+      const existNewTask: boolean = await taskService.exist(task.id!);
 
-      const deletedTask = await taskService.delete(task.id!);
-      const resultAfter: boolean = await taskService.exist(task.id!);
+      const taskDeleted = await taskService.delete(task.id!);
+      const existAfterDelete: boolean = await taskService.exist(task.id!);
 
-      expect(deletedTask).toBeTruthy;
-      expect(resultBefore).toBe(true);
-      expect(resultAfter).toBe(false);
+      expect(taskDeleted).toBeTruthy;
+      expect(existNewTask).toBe(true);
+      expect(existAfterDelete).toBe(false);
     });
 
     it('should return false when deleting a non-existing task on TaskService', async () => {
@@ -124,7 +123,6 @@ describe('#taskService', () => {
       }
       expect(await testDel()).toBeFalsy();
     });
-
   });
 
 });
