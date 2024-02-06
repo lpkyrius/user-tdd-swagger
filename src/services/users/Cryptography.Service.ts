@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 
-class Cryptograph {
+class Cryptography {
     private readonly saltRounds: number = 10;
 
     async encrypt(pwd: string): Promise<string> {
@@ -11,3 +11,5 @@ class Cryptograph {
         return await bcrypt.compare(pwd, hash);
     }
 }
+
+export { }
