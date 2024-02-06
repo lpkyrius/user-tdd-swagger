@@ -18,6 +18,7 @@
     - [x] TDD ManagerUserTestFile
     - [x] TDD User Repository In-Memory (Start with the methods signature only)
     - [x] TDD Services - UserService
+    - [x] Setting up switch mode for e2e tests using .env
     - [ ] TDD Controller - UserService
     - [ ] TDD Router - UserService
     - [ ] Swagger update - add User process
