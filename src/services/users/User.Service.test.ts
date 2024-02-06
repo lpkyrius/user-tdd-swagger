@@ -31,6 +31,25 @@ describe('#UserService', () =>{
         })
     })
 
+    describe('#UserEmailExist', () => {
+        it('should return true when check if an existent user email exists', async () => {
+            const user: User = {
+                'email': 'exist.email@gmail.com',
+                'role': '2'
+            };
+            const addedUser = await userService.add(user);
+            const result = await userService.emailExists(addedUser.email);
+
+            expect(result).toBeTruthy();
+        })
+
+        it('should return false when check if a non-existent user exists', async () => {
+            const result = await userService.emailExists('this.id.does.not.exist');
+
+            expect(result).toBeFalsy();
+        })
+    })
+
     describe('#CreateUser', () => {
         it('should be able to create a new user and confirm it exists', async () => {
             const user: User = {

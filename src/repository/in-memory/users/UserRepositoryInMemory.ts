@@ -50,6 +50,12 @@ class UserRepositoryInMemory implements IUserRepository {
         return users.some((user) => user.id === id);
     }
 
+    async emailExists(email: string): Promise<boolean> {
+        const users = this.readUsersFromFile();
+        
+        return users.some((user) => user.email === email);
+    }
+
     async list(): Promise<User[]> {
         return this.readUsersFromFile();
     }

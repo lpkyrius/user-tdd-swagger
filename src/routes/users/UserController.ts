@@ -12,6 +12,8 @@ class UserController {
         return res.status(400).json({ error: 'invalid email' });
       if (!this.checkRole(role))
         return res.status(400).json({ error: 'invalid role' });
+      if (await this.userService.emailExists(email))
+        return res.status(400).json({ error: 'email already exists' });
 
       const user = await this.userService.add({ email, role });
       

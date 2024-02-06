@@ -41,8 +41,44 @@ if (!e2eTestEnabled) {
                   expect(response.body.email).toBe('paul.tech@gmail.com');
               });
 
-            test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted email.')
+            test('It should respond with 400 bad request + Content-Type = json for bad formatted email.', async () => {
+                const userData: User = {
+                    'email': 'paul.techgmail.com',
+                    'role': '2'
+                };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+
+                expect(response.body).toEqual({ error: 'invalid email' })
+            })
+
+            test('It should respond with 400 bad request + Content-Type = json for an existent email.', async () => {
+                const userData: User = {
+                    'email': 'existent@email.com',
+                    'role': '2'
+                };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(201);
+
+                expect(response.body.email).toBe('existent@email.com');
+
+                const responseError = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+
+                expect(responseError.body).toEqual({ error: 'email already exists' })
+            })
+
             test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted role (!1 or !2).')
+            
             test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted task.')
         })
 
@@ -52,13 +88,17 @@ if (!e2eTestEnabled) {
 
         describe('Test GET /user/find/:id', () => {
             test.todo('It should respond with 200 success + Content-Type = json containing an user like object.')
+            
             test.todo('It should respond with 404 not found when trying to find an id that does not exist.')
         })
 
         describe('Test GET /user/update/:id', () => {
             test.todo('It should respond with 200 success + Content-Type = json with the updated user.')
+            
             test.todo('It should respond with 400 bad request when trying to update with a bad email format.')
+            
             test.todo('It should respond with 400 bad request when trying to update with an email larger than 100 characters.')
+            
             test.todo('It should respond with 404 when trying to update with a id that does not exist.')
         })
 

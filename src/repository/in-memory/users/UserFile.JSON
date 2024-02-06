@@ -14,7 +14,13 @@
   {
     "email": "paul.tech@gmail.com",
     "role": "2",
-    "id": "f64d7542-53ec-4e65-8001-c4b9d95935dd",
-    "created_at": "2024-02-06T16:06:10.944Z"
+    "id": "34ec3d94-05cb-4ad8-9593-c9f7a28156f2",
+    "created_at": "2024-02-06T17:02:18.501Z"
+  },
+  {
+    "email": "existent@email.com",
+    "role": "2",
+    "id": "ea44ba26-5679-4d6e-b081-30b9a354694b",
+    "created_at": "2024-02-06T17:02:18.513Z"
   }
 ]
