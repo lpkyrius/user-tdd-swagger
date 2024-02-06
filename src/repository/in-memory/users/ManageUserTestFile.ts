@@ -9,6 +9,10 @@ class ManageUserTestFile {
     this.newFile();
   }
 
+  getFilePath() {
+    return this.filePath;
+  }
+
   async newFile() {
     try {
       if (!fs.existsSync(this.filePath)) {
@@ -31,7 +35,9 @@ class ManageUserTestFile {
 
   async deleteFile(): Promise<void> {
     try {
-      await fs.promises.unlink(this.filePath);
+      if (fs.existsSync(this.filePath)) {
+        await fs.promises.unlink(this.filePath);
+      }
     } catch (error) {
       console.error('Error deleting file UserFile.JSON:', error);
       throw error;

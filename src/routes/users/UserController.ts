@@ -1,26 +1,25 @@
 import { Request, Response } from "express";
 import { UserService } from "../../services/users/User.Service";
 import { User } from "../../entities/User";
-
+import { UserRole } from "../../repository/in-memory/UserRole";
 class UserController {
   constructor(private userService: UserService) {}
 
   async httpAddUser(req: Request, res: Response) {
-    // try {
-    //   const { userId, summary } = req.body;
+    try {
+      const { email, role } = req.body;
+      if (!this.checkEmail(email))
+        return res.status(400).json({ error: 'invalid email' });
+      if (!this.checkRole(role))
+        return res.status(400).json({ error: 'invalid role' });
 
-    //   if (!this.checkUserId(userId))
-    //     return res.status(400).json({ error: 'invalid userId' });
-    //   if (!this.checkSummary(summary))
-    //     return res.status(400).json({ error: 'invalid summary' });
-
-    //   const task = await this.userService.add({ userId, summary });
-
-    //   return res.status(201).json(task);
-    // } catch (error: any) {
-    //   console.error(`httpAddTask Error-> ${error}`);
-    //   res.status(500).json({error: 'error attempting to add a task'});
-    // } 
+      const user = await this.userService.add({ email, role });
+      
+      return res.status(201).json(user);
+    } catch (error: any) {
+      console.error(`httpAddUser Error-> ${error}`);
+      res.status(500).json({error: 'error attempting to add an user'});
+    } 
   }
 
   async httpListUsers(req: Request, res: Response) {
@@ -75,35 +74,32 @@ class UserController {
     // }
   }
 
-  checkEmail(email: string) {
-    // try {
-    //   // Size between 3 to 100
-    //   const PWD_REGEX = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/;
-    //   if (!userId)
-    //       return false;
-    //   if(PWD_REGEX.test(userId)) 
-    //       return true; 
-    
-    //   return false;
-    // } catch (error: any) {
-    //   console.error(`checkUserId Error-> ${error}`);
-    // } 
+  checkEmail(email: any) {
+    try {
+      if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) 
+        return false; 
+      if (email.length < 3 || email.length > 100)
+          return false;
+
+      return true; 
+    } catch (error: any) {
+      console.error(`checkEmail Error-> ${error}`);
+    } 
   }
 
-  checkRole(role: string) {
-    // try {
-    //   // Matches any alphanumeric character or the specified symbols. 
-    //   // Size between 3 to 100
-    //   const PWD_REGEX = /^.{3,100}$/;
-    //   if (!summary)
-    //       return false;
-    //   if(PWD_REGEX.test(summary)) 
-    //       return true; 
-    
-    //   return false;
-    // } catch (error: any) {
-    //   console.error(`checkUserId Error-> ${error}`);
-    // }  
+  checkRole(role: any) {
+    try {
+      // Matches any alphanumeric character or the specified symbols. 
+      // Size between 3 to 100
+      if (!role)
+          return false;
+      if(!Object.values(UserRole).includes(role)) 
+          return false; 
+  
+      return true;
+    } catch (error: any) {
+      console.error(`checkRole Error-> ${error}`);
+    }  
   }
 }
 

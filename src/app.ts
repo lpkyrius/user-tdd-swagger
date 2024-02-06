@@ -1,7 +1,7 @@
 import express from 'express'; 
 import cors from 'cors';
-// import usersRouter from './routes/users/user.router.js';
 import tasksRouter from './routes/tasks/tasks.router';
+import userRouter from './routes/users/user.router';
 
 const app = express();
 
@@ -26,6 +26,7 @@ app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {res.status(200).send('Tasks App')}); 
 app.use(tasksRouter);
+app.use(userRouter);
 
 export default app;
 

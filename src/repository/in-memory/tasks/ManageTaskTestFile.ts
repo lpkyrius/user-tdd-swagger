@@ -31,7 +31,9 @@ class ManageTaskTestFile {
 
   async deleteFile(): Promise<void> {
     try {
-      await fs.promises.unlink(this.filePath);
+      if (fs.existsSync(this.filePath)) {
+        await fs.promises.unlink(this.filePath);
+      }
     } catch (error) {
       console.error('Error deleting file TaskFile.JSON:', error);
       throw error;

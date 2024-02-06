@@ -1,8 +1,6 @@
 import { expect, describe, test, beforeAll } from '@jest/globals';
 import request from 'supertest';
 import app from '../../app';
-import * as fs from 'fs';
-import path from 'path';
 import { mockedTasks } from './mockedTasks';
 import { Task } from '../../entities/Task';
 import { ManageTaskTestFile } from '../../repository/in-memory/tasks/ManageTaskTestFile';
@@ -24,13 +22,8 @@ if (!e2eTestEnabled) {
     const manageTaskTestFile = new ManageTaskTestFile();
 
     beforeAll(() => {
-      // To reset our TasksFile.JSON
-      const tempFile = manageTaskTestFile.getFile();
-      const filePath: string = path.resolve(__dirname) + '/TasksFile.JSON';
-      if (fs.existsSync(tempFile)) {
-        manageTaskTestFile.resetFile();
-      }
-  });
+      manageTaskTestFile.resetFile();
+    });
 
     describe('Test POST /task/add', () => {
       test('It should respond with 200 success + Content-Type = json.', async () => {
@@ -45,7 +38,7 @@ if (!e2eTestEnabled) {
           .send(taskData)
           .expect('Content-Type', /json/)
           .expect(201);
-              
+            
           expect(response.body).toMatchObject(taskData);
           expect(response.body.summary).toBe('E2E Test summary #1');
       });

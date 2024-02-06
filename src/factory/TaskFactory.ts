@@ -1,6 +1,6 @@
 import { TaskService } from "../services/tasks/TaskService";
 import { TaskController } from "../routes/tasks/TaskController";
-import { TasksRepositoryInMemory } from "../repository/in-memory/tasks/TasksRepositoryInMemory";
+import { TasksRepositoryInMemory } from "../repository/in-memory/tasks/TaskRepositoryInMemory";
 
 export default class TaskFactory {
   static async createInstance() {

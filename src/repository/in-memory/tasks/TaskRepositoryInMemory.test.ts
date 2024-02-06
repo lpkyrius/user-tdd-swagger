@@ -1,5 +1,5 @@
 import { expect, describe, jest, test, beforeAll } from '@jest/globals';
-import { TasksRepositoryInMemory } from './TasksRepositoryInMemory';
+import { TasksRepositoryInMemory } from './TaskRepositoryInMemory';
 import { ITaskRepository } from '../ITaskRepository';
 
 

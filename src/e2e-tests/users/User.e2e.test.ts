@@ -1,8 +1,6 @@
 import { expect, describe, test, beforeAll } from '@jest/globals';
 import request from 'supertest';
 import app from '../../app';
-import * as fs from 'fs';
-import path from 'path';
 import { mockedUsers } from './mockedUsers';
 import { User } from '../../entities/User';
 import { ManageUserTestFile } from '../../repository/in-memory/users/ManageUserTestFile';
@@ -20,9 +18,29 @@ if (!e2eTestEnabled) {
       test.skip('All end-to-end tests are skipped because e2e tests are disabled.', () => {});
     });
   } else {
-    describe('#E2E tests for tasks.', () => {
+    describe.skip('#E2E tests for tasks.', () => {
+        const manageTaskTestFile = new ManageUserTestFile();
+
+        beforeAll(() => {
+            manageTaskTestFile.resetFile();
+        });
+
         describe('Test POST /user/add', () => {
-            test.todo('It should respond with 200 success + Content-Type = json.')
+            test('It should respond with 200 success + Content-Type = json.', async () => {
+                const userData: User = {
+                    'email': 'paul.tech@gmail.com',
+                    'role': '2'
+                };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(201);
+
+                  expect(response.body).toHaveProperty('id');
+                  expect(response.body.email).toBe('paul.tech@gmail.com');
+              });
+
             test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted email.')
             test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted role.')
             test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted task.')
