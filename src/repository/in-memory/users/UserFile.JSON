@@ -1,1 +1,20 @@
-[{"id":"533b7681-b1c3-4244-8a37-423ae7a3d8ac","email":"john.manager@gmail.com","role":"1","created_at":"2023-12-24T16:17:18.622Z"},{"id":"943b7681-b1c3-4244-8a37-423ae7a3d7bc","email":"mary.tech@gmail.com","role":"2","created_at":"2024-01-30T11:32:34.690Z"}]
+[
+  {
+    "id": "533b7681-b1c3-4244-8a37-423ae7a3d8ac",
+    "email": "john.manager@gmail.com",
+    "role": "1",
+    "created_at": "2023-12-24T16:17:18.622Z"
+  },
+  {
+    "id": "943b7681-b1c3-4244-8a37-423ae7a3d7bc",
+    "email": "mary.tech@gmail.com",
+    "role": "2",
+    "created_at": "2024-01-30T11:32:34.690Z"
+  },
+  {
+    "email": "paul.tech@gmail.com",
+    "role": "2",
+    "id": "f64d7542-53ec-4e65-8001-c4b9d95935dd",
+    "created_at": "2024-02-06T16:06:10.944Z"
+  }
+]

@@ -18,7 +18,7 @@ if (!e2eTestEnabled) {
       test.skip('All end-to-end tests are skipped because e2e tests are disabled.', () => {});
     });
   } else {
-    describe.skip('#E2E tests for tasks.', () => {
+    describe('#E2E tests for tasks.', () => {
         const manageTaskTestFile = new ManageUserTestFile();
 
         beforeAll(() => {
@@ -42,7 +42,7 @@ if (!e2eTestEnabled) {
               });
 
             test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted email.')
-            test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted role.')
+            test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted role (!1 or !2).')
             test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted task.')
         })
 
