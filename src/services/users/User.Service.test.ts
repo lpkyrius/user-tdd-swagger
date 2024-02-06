@@ -155,5 +155,20 @@ describe('#UserService', () =>{
         });
         
     });
+
+    describe('#Log in User', () => {
+        let user: User;
+    
+        it.todo('should log in with a valid user info');
+    
+        it.todo('should provide the warning when trying to log in with not registered email');
+
+        it.todo('should provide the warning when trying to log in with wrong password');
         
+        it.todo('should provide the warning when trying to log in with invalid email');
+
+        it.todo('should provide the warning when trying to log in with invalid password');
+    
+    });
+    
 });
