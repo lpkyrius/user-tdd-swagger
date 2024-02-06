@@ -34,7 +34,7 @@ describe('#UserService', () =>{
     describe('#UserEmailExist', () => {
         it('should return true when check if an existent user email exists', async () => {
             const user: User = {
-                'email': 'exist.email@gmail.com',
+                'email': 'exist.tech@email.com',
                 'role': '2'
             };
             const addedUser = await userService.add(user);
@@ -53,7 +53,7 @@ describe('#UserService', () =>{
     describe('#CreateUser', () => {
         it('should be able to create a new user and confirm it exists', async () => {
             const user: User = {
-                'email': 'peter.tech@gmail.com',
+                'email': 'peter.tech@email.com',
                 'role': '2'
             };
             const addedUser = await userService.add(user);
@@ -61,7 +61,7 @@ describe('#UserService', () =>{
 
             expect(addedUser).toHaveProperty('id');
             expect(result).toBeTruthy();
-            expect(user.email).toEqual('peter.tech@gmail.com')
+            expect(user.email).toEqual('peter.tech@email.com')
         })
     })
 

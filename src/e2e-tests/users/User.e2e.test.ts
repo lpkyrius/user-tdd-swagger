@@ -18,17 +18,17 @@ if (!e2eTestEnabled) {
       test.skip('All end-to-end tests are skipped because e2e tests are disabled.', () => {});
     });
   } else {
-    describe('#E2E tests for tasks.', () => {
-        const manageTaskTestFile = new ManageUserTestFile();
+    describe('#E2E tests for users.', () => {
+        const manageUserTestFile = new ManageUserTestFile();
 
         beforeAll(() => {
-            manageTaskTestFile.resetFile();
+            manageUserTestFile.resetFile();
         });
 
         describe('Test POST /user/add', () => {
             test('It should respond with 200 success + Content-Type = json.', async () => {
                 const userData: User = {
-                    'email': 'paul.tech@gmail.com',
+                    'email': 'paul.tech@email.com',
                     'role': '2'
                 };
                 const response = await request(app)
@@ -38,12 +38,12 @@ if (!e2eTestEnabled) {
                     .expect(201);
 
                   expect(response.body).toHaveProperty('id');
-                  expect(response.body.email).toBe('paul.tech@gmail.com');
+                  expect(response.body.email).toBe('paul.tech@email.com');
               });
 
             test('It should respond with 400 bad request + Content-Type = json for bad formatted email.', async () => {
                 const userData: User = {
-                    'email': 'paul.techgmail.com',
+                    'email': 'paul.techemail.com',
                     'role': '2'
                 };
                 const response = await request(app)
@@ -77,13 +77,34 @@ if (!e2eTestEnabled) {
                 expect(responseError.body).toEqual({ error: 'email already exists' })
             })
 
-            test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted role (!1 or !2).')
+            test('It should respond with 400 bad request + Content-Type = json for bad formatted role (!1 or !2).', async () => {
+                const userData: User = {
+                    'email': 'bad.role@email.com',
+                    'role': '3'
+                };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+
+                expect(response.body).toEqual({ error: 'invalid role' })
+            })
             
-            test.todo('It should respond with 400 bad request + Content-Type = json for bad formatted task.')
+            test('It should respond with 400 bad request + Content-Type = json for bad formatted user.', async () => {
+                const userData = { };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+
+                expect(response.body).toEqual({ error: 'invalid email' })
+            })
         })
 
         describe('Test GET /user/list', () => {
-            test.todo('It should respond with 200 success + Content-Type = json containing a Task like object.')
+            test.todo('It should respond with 200 success + Content-Type = json containing a User like object.')
         })
 
         describe('Test GET /user/find/:id', () => {
