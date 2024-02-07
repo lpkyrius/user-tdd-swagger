@@ -69,13 +69,43 @@ describe('#UserService', () =>{
 
     describe('#LoginUser', () => {
         it('should be able to log in with valid user and password', async () => {
-            const user = {
+            const userData = {
                 email: 'mary.tech@email.com',
                 password: 'mary.tech@123'
             };
-            const result = await userService.login(user);
+            const result = await userService.login(userData);
 
             expect(result).toBeTruthy();
+        })
+        
+        it('should NOT be able to log in with invalid password', async () => {
+            const noPasswordUser = {
+                email: 'mary.tech@email.com',
+                password: ''
+            };
+            const result = await userService.login(noPasswordUser);
+
+            expect(result).toBeFalsy();
+        })
+
+        it('should throw an error when trying to log in with invalid user', async () => {
+            const userInvalid = {
+                email: 'i.do.not.exist@email.com',
+                password: 'mary.tech@123'
+            };
+            await expect(async () => {
+                const loginIssue: boolean = await userService.login(userInvalid);
+            }).rejects.toThrow('email not found');
+        })
+
+        it('should throw an error when trying to log in with invalid user email', async () => {
+            const userInvalid = {
+                email: '',
+                password: ''
+            };
+            await expect(async () => {
+                const loginIssue: boolean = await userService.login(userInvalid);
+            }).rejects.toThrow('email not found');
         })
     })
 
@@ -172,21 +202,6 @@ describe('#UserService', () =>{
             expect(await testDel()).toBeFalsy();
         });
         
-    });
-
-    describe('#Log in User', () => {
-        let user: User;
-    
-        it.todo('should log in with a valid user info');
-    
-        it.todo('should provide the warning when trying to log in with not registered email');
-
-        it.todo('should provide the warning when trying to log in with wrong password');
-        
-        it.todo('should provide the warning when trying to log in with invalid email');
-
-        it.todo('should provide the warning when trying to log in with invalid password');
-    
     });
     
 });

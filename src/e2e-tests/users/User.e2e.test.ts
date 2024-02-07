@@ -138,6 +138,22 @@ if (!e2eTestEnabled) {
             })
         })
 
+        describe('Test POST /user/login', () => {
+            test('It should respond with 200 success + Content-Type = json.', async () => {
+                const userData = {
+                    email: 'mary.tech@email.com',
+                    password: 'mary.tech@123'
+                };
+                const response = await request(app)
+                    .post('/user/login')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(200);
+
+                expect(response.body).toEqual({ message: 'success' });
+              });
+        })
+
         describe('Test GET /user/list', () => {
             test.todo('It should respond with 200 success + Content-Type = json containing a User like object.')
         })

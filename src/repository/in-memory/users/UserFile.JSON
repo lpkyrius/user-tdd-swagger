@@ -14,31 +14,45 @@
     "created_at": "2024-01-30T11:32:34.690Z"
   },
   {
-    "email": "success.test.tech@email.com",
-    "password": "$2a$10$82sRihyBiGmyC0D3/.4JTu/B..tLU0LviSex5.WaFpEgvWpSjKr06",
+    "email": "exist.tech@email.com",
+    "password": "$2a$10$mqiu1O4Rg/b288OphijgOe.vnKsNPvt6JXeDUAAsIXvrNE38wfuQq",
     "role": "2",
-    "id": "93cb3530-71a0-461a-b582-42fa6777e839",
-    "created_at": "2024-02-07T12:36:38.350Z"
+    "id": "0984ebe5-6b2f-4696-8d8c-00fce3a6adf0",
+    "created_at": "2024-02-07T14:47:38.666Z"
   },
   {
-    "email": "manager.to.find@email.com",
-    "password": "$2a$10$kqEQkjJhbJhHVYQrqBvlrebJaNOOuKykESksWezOU.qqkRmxFBKKG",
-    "role": "1",
-    "id": "0837ca1e-48a7-4aec-a7d6-a8d23aae6884",
-    "created_at": "2024-02-07T12:36:38.365Z"
+    "email": "success.test.tech@email.com",
+    "password": "$2a$10$pOiU5Myc2iQW/oJSOgkHQOclbV6CVnoAhmbVclTNqfvh3WQ0fWBBK",
+    "role": "2",
+    "id": "3c301fe9-18d7-4b7f-9090-0b94385ad45f",
+    "created_at": "2024-02-07T14:47:38.729Z"
+  },
+  {
+    "email": "peter.tech@email.com",
+    "password": "$2a$10$Pbrdh1rtxOqHy9OpKoxucuKhSn9uXk.eEWHW6UH1rQXMh0EHxo2Pm",
+    "role": "2",
+    "id": "57589d0a-cb83-4ba5-860b-d2e2ee2ffef6",
+    "created_at": "2024-02-07T14:47:38.743Z"
   },
   {
     "email": "existent@email.com",
-    "password": "$2a$10$k0UGpIWuZgSD7GkVvdaTxOB/2P7K56yfaJ8FcdHuTDLmrc6QI1qka",
+    "password": "$2a$10$qvvJ.iMOYZl1k/65oP0pX.RlF4spQ0DIvmF8NULpaE3II/.IA5Tfe",
     "role": "2",
-    "id": "0a328ecf-c90b-4cc4-86ab-5544bd61a2e8",
-    "created_at": "2024-02-07T12:36:38.435Z"
+    "id": "36e8c677-734e-4279-bded-d28d61bf41bb",
+    "created_at": "2024-02-07T14:47:38.823Z"
+  },
+  {
+    "email": "manager.to.find@email.com",
+    "password": "$2a$10$gw0KB.KMo0dqFmSkarS20evKSJ9koGNre9Y5Nml5ICF0vx7XdtgK2",
+    "role": "1",
+    "id": "05f9b2b9-9270-4329-a343-04eb2dee24d5",
+    "created_at": "2024-02-07T14:47:38.976Z"
   },
   {
     "email": "manager.updated@email.com",
-    "password": "$2a$10$CMF4td7ASExFrn7mXhm7k.zl5U5QsAoHdrVktxuu9osy8jp2vgkE6",
+    "password": "$2a$10$wVzKia9YtsqkfNKjOqDx/.cC61i4MZRzmW9mlqc2ZeDTLbizwOgR.",
     "role": "1",
-    "id": "27dff73e-37f5-48e8-8712-3ed62aef6a6d",
-    "created_at": "2024-02-07T12:36:38.447Z"
+    "id": "b6e2237e-4e06-406f-9d01-b827cd425a5f",
+    "created_at": "2024-02-07T14:47:39.047Z"
   }
 ]

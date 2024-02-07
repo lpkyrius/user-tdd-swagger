@@ -29,6 +29,23 @@ class UserController {
     } 
   }
 
+  async httpLogin(req: Request, res: Response) {
+    try {
+      const { email, password } = req.body;
+      if (!this.checkEmail(email))
+        return res.status(400).json({ error: 'invalid email' });
+      if (!this.checkPassword(password))
+        return res.status(400).json({ error: `password should contain between ${ passwordMinSize } and ${ passwordMaxSize } characters` });
+
+      if (await this.userService.login({ email, password }))
+        return res.status(200).json({ message: 'success' });
+
+    } catch (error: any) {
+      console.error(`httpAddUser Error-> ${error}`);
+      res.status(500).json({error: 'error attempting to add an user'});
+    } 
+  }
+
   async httpListUsers(req: Request, res: Response) {
     // try {
     //   const taskList = await this.userService.list();
