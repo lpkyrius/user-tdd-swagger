@@ -109,17 +109,6 @@ describe('#UserService', () =>{
         })
     })
 
-    describe('#ListUser', () => {
-        let users: User[]; 
-
-        it('should receive an array of users', async () => {
-            users = await userService.list();
-
-            expect(users).toBeInstanceOf(Array);
-            expect(users).toEqual(userStructure);
-        })
-    })
-
     describe('#Find User', () => {
         let user: User;
     

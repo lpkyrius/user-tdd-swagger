@@ -8,5 +8,4 @@ export interface IUserRepository {
   exists(id: string): Promise<boolean>;
   emailExists(email: string): Promise<boolean>;
   findUserById(id: string): Promise<User>;
-  list(): Promise<User[]>;
 }

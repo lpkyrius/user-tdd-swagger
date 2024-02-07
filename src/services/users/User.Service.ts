@@ -45,10 +45,6 @@ class UserService {
         return await this.userRepository.delete(id);
     }
 
-    async list(): Promise<User[]> {
-        return await this.userRepository.list();
-    }
-
     async findById(id: string): Promise<User> {
         return await this.userRepository.findUserById(id);
     }

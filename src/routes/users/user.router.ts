@@ -9,7 +9,6 @@ const userFactory = async () => {
 
 userRouter.post('/user/add'  , async (req: Request, res: Response) => await (await userFactory()).httpAddUser(req, res));
 userRouter.post('/user/login', async (req: Request, res: Response) => await (await userFactory()).httpLogin(req, res));
-userRouter.get ('/user/list' , async (req: Request, res: Response) => await (await userFactory()).httpListUsers(req, res));
 userRouter.get ('/user/find/:id'  , async (req: Request, res: Response) => await (await userFactory()).httpFindUserById(req, res));
 userRouter.put ('/user/update/:id', async (req: Request, res: Response) => await (await userFactory()).httpUpdateUser(req, res));
 

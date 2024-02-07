@@ -154,14 +154,36 @@ if (!e2eTestEnabled) {
               });
         })
 
-        describe('Test GET /user/list', () => {
-            test.todo('It should respond with 200 success + Content-Type = json containing a User like object.')
-        })
-
         describe('Test GET /user/find/:id', () => {
-            test.todo('It should respond with 200 success + Content-Type = json containing an user like object.')
-            
-            test.todo('It should respond with 404 not found when trying to find an id that does not exist.')
+            test('It should respond with 200 success + Content-Type = json containing a User like object.', async () => {
+                const userData: User = {
+                    email: 'to.find.test.tech@email.com',
+                    password: 'to.find.test.tech@123',
+                    role: '2'
+                };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(201);
+
+                const responseFind = await request(app)
+                    .get('/user/find/'+ response.body.id)
+                    .expect('Content-Type', /json/)
+                    .expect(200);
+
+                expect(responseFind.body).toEqual(response.body);
+              });
+        
+              test('It should respond with 404 not found when trying to find an id that does not exist.', async () => {
+        
+                const responseUpdate = await request(app)
+                    .get('/user/find/this.id.should.not.exist')
+                    .expect('Content-Type', /json/)
+                    .expect(404);
+        
+                    expect(responseUpdate.body).toEqual({ error: 'user not found' });
+              });
         })
 
         describe('Test GET /user/update/:id', () => {

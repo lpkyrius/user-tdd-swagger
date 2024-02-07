@@ -40,13 +40,14 @@ class TaskController {
       if (!id)
         return res.status(400).json({ error: 'invalid id' });
 
-      const taskExist = await this.taskService.exist(id)
-      if (!taskExist)
-        return res.status(404).json({ error: 'task not found' });
-      const foundTask = await this.taskService.findById(id);
+      const taskFound = await this.taskService.findById(id);
+      if (taskFound)
+        return res.status(200).json(taskFound);
 
       return res.status(200).json(await this.taskService.findById(id));
     } catch (error: any) {
+      if (error.message.includes('Id not found')) 
+        return res.status(404).json({ error: 'task not found' });
       console.error(`httpFindTaskById Error-> ${error}`);
       res.status(500).json({error: 'error attempting to find the task'});
     }
