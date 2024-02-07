@@ -7,7 +7,7 @@ class UserController {
 
   async httpAddUser(req: Request, res: Response) {
     try {
-      const { email, role } = req.body;
+      const { email, password, role } = req.body;
       if (!this.checkEmail(email))
         return res.status(400).json({ error: 'invalid email' });
       if (!this.checkRole(role))
@@ -15,7 +15,7 @@ class UserController {
       if (await this.userService.emailExists(email))
         return res.status(400).json({ error: 'email already exists' });
 
-      const user = await this.userService.add({ email, role });
+      const user = await this.userService.add({ email, password, role });
       
       return res.status(201).json(user);
     } catch (error: any) {

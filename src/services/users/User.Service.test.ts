@@ -34,8 +34,9 @@ describe('#UserService', () =>{
     describe('#UserEmailExist', () => {
         it('should return true when check if an existent user email exists', async () => {
             const user: User = {
-                'email': 'exist.tech@email.com',
-                'role': '2'
+                email: 'exist.tech@email.com',
+                password: 'exist.tech@123',
+                role: '2'
             };
             const addedUser = await userService.add(user);
             const result = await userService.emailExists(addedUser.email);
@@ -53,8 +54,9 @@ describe('#UserService', () =>{
     describe('#CreateUser', () => {
         it('should be able to create a new user and confirm it exists', async () => {
             const user: User = {
-                'email': 'peter.tech@email.com',
-                'role': '2'
+                email: 'peter.tech@email.com',
+                password: 'peter.tech@123',
+                role: '2'
             };
             const addedUser = await userService.add(user);
             const result = await userService.exist(addedUser.id!);
@@ -83,6 +85,7 @@ describe('#UserService', () =>{
             let user: User, result: User; 
             const userData = {
                 email: 'manager.to.find@email.com',
+                password: 'manager.to.find@123',
                 role: '1',
             };
 
@@ -104,6 +107,7 @@ describe('#UserService', () =>{
             let user: User, result: User; 
             const userData = {
                 email: 'manager.to.update@email.com',
+                password: 'manager.to.update@123',
                 role: '1',
             };
 
@@ -121,6 +125,7 @@ describe('#UserService', () =>{
         const userError: User = {
             id: 'this.id.should.not.exist',
             email: 'this.user.does.not.exist@email.com',
+            password: 'this.user.does.not.exist@123',
             role: '1',
         };
         await expect(async () => {
@@ -133,6 +138,7 @@ describe('#UserService', () =>{
         it('should be able to delete an existent user', async () => {
             const userData = {
                 email: 'manager.to.create@email.com',
+                password: 'manager.to.create@123',
                 role: '1',
             };
         

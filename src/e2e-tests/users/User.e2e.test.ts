@@ -28,8 +28,9 @@ if (!e2eTestEnabled) {
         describe('Test POST /user/add', () => {
             test('It should respond with 200 success + Content-Type = json.', async () => {
                 const userData: User = {
-                    'email': 'paul.tech@email.com',
-                    'role': '2'
+                    email: 'success.test.tech@email.com',
+                    password: 'success.test.tech@123',
+                    role: '2'
                 };
                 const response = await request(app)
                     .post('/user/add')
@@ -38,13 +39,14 @@ if (!e2eTestEnabled) {
                     .expect(201);
 
                   expect(response.body).toHaveProperty('id');
-                  expect(response.body.email).toBe('paul.tech@email.com');
+                  expect(response.body.email).toBe('success.test.tech@email.com');
               });
 
             test('It should respond with 400 bad request + Content-Type = json for bad formatted email.', async () => {
                 const userData: User = {
-                    'email': 'paul.techemail.com',
-                    'role': '2'
+                    email: 'test.techemail.com',
+                    password: 'test.tech@123',
+                    role: '2'
                 };
                 const response = await request(app)
                     .post('/user/add')
@@ -55,10 +57,42 @@ if (!e2eTestEnabled) {
                 expect(response.body).toEqual({ error: 'invalid email' })
             })
 
+            test.skip('It should respond with 400 bad request + Content-Type = json for bad formatted password.', async () => {
+                const userData: User = {
+                    email: 'test.tech@email.com',
+                    password: '',
+                    role: '2'
+                };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+
+                expect(response.body).toEqual({ error: 'invalid password' })
+            })
+
+            test.skip('It should respond with 400 bad request + Content-Type = json for a password larger than 100.', async () => {
+                const repeatString: string = 'x'
+                const userData: User = {
+                    email: 'test.tech@email.com',
+                    password: repeatString.repeat(101),
+                    role: '2'
+                };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+
+                expect(response.body).toEqual({ error: 'invalid password' })
+            })
+
             test('It should respond with 400 bad request + Content-Type = json for an existent email.', async () => {
                 const userData: User = {
-                    'email': 'existent@email.com',
-                    'role': '2'
+                    email: 'existent@email.com',
+                    password: 'existent@123',
+                    role: '2'
                 };
                 const response = await request(app)
                     .post('/user/add')
@@ -79,8 +113,9 @@ if (!e2eTestEnabled) {
 
             test('It should respond with 400 bad request + Content-Type = json for bad formatted role (!1 or !2).', async () => {
                 const userData: User = {
-                    'email': 'bad.role@email.com',
-                    'role': '3'
+                    email: 'bad.role@email.com',
+                    password: 'bad.role@123',
+                    role: '3'
                 };
                 const response = await request(app)
                     .post('/user/add')

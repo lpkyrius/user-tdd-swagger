@@ -1,8 +1,9 @@
 import { User } from '../../entities/User';
 import { IUserRepository } from '../../repository/in-memory/IUserRepository';
-
+import { Cryptography } from '../Cryptography/Cryptography.Service';
 interface IAddUserRequest {
     email: string;
+    password: string;
     role: string;
   };
 
@@ -18,8 +19,10 @@ class UserService {
         return await this.userRepository.emailExists(email);
     }
 
-    async add({ email, role }: IAddUserRequest) {
-        return await this.userRepository.add({ email, role });
+    async add({ email, password, role }: IAddUserRequest) {
+        const crypto = new Cryptography();
+        password = await crypto.encrypt(password);
+        return await this.userRepository.add({ email, password, role });
     }
 
     async update(userToUpdate: User): Promise<User> {
