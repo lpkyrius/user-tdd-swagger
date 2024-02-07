@@ -9,36 +9,36 @@
   {
     "id": "943b7681-b1c3-4244-8a37-423ae7a3d7bc",
     "email": "mary.tech@email.com",
-    "password": "$2a$10$B1KRRDrQrjL59Sq00P6Zfub9/2P50BnkOWimB1N9sOKeg/JcRcj1y",
+    "password": "$2a$10$ivVPqg7qdwZpUG6Ad566/.VpbPhCADQl3fEH8eHIlHPU.OdgwywSm",
     "role": "2",
     "created_at": "2024-01-30T11:32:34.690Z"
   },
   {
-    "email": "manager.to.find@email.com",
-    "password": "$2a$10$wvTkw2ZVHX5IL87FN.5KJOzCsf9Zokp0V1.uk5c18sqRGXpu/L9qG",
-    "role": "1",
-    "id": "1282ccc9-f415-4184-bea5-830726a35e20",
-    "created_at": "2024-02-07T10:56:33.681Z"
-  },
-  {
     "email": "success.test.tech@email.com",
-    "password": "$2a$10$gfn7mfs7NPQ4zl0OTluqmuAIvJplSFgjlCnovQL/rx8EtTA46K5ja",
+    "password": "$2a$10$82sRihyBiGmyC0D3/.4JTu/B..tLU0LviSex5.WaFpEgvWpSjKr06",
     "role": "2",
-    "id": "6794684e-f257-409e-bc3d-c6f5b46bc837",
-    "created_at": "2024-02-07T10:56:33.744Z"
+    "id": "93cb3530-71a0-461a-b582-42fa6777e839",
+    "created_at": "2024-02-07T12:36:38.350Z"
   },
   {
-    "email": "manager.updated@email.com",
-    "password": "$2a$10$otWgHV/glAUoN7ISVdsADu8nBfFIztfM.iOVSX5nXjapJ2wVjG/H6",
+    "email": "manager.to.find@email.com",
+    "password": "$2a$10$kqEQkjJhbJhHVYQrqBvlrebJaNOOuKykESksWezOU.qqkRmxFBKKG",
     "role": "1",
-    "id": "de0b85c8-fe9c-4f11-a6e9-ab9ecce62fe6",
-    "created_at": "2024-02-07T10:56:33.761Z"
+    "id": "0837ca1e-48a7-4aec-a7d6-a8d23aae6884",
+    "created_at": "2024-02-07T12:36:38.365Z"
   },
   {
     "email": "existent@email.com",
-    "password": "$2a$10$6o3xytaIj0fAN7pUSzk0..jKXamzAsxHGxP/FS7tSb5QzAAMKzxti",
+    "password": "$2a$10$k0UGpIWuZgSD7GkVvdaTxOB/2P7K56yfaJ8FcdHuTDLmrc6QI1qka",
     "role": "2",
-    "id": "37a69ce3-0afd-4b63-b5fb-9e0cc1a80339",
-    "created_at": "2024-02-07T10:56:33.825Z"
+    "id": "0a328ecf-c90b-4cc4-86ab-5544bd61a2e8",
+    "created_at": "2024-02-07T12:36:38.435Z"
+  },
+  {
+    "email": "manager.updated@email.com",
+    "password": "$2a$10$CMF4td7ASExFrn7mXhm7k.zl5U5QsAoHdrVktxuu9osy8jp2vgkE6",
+    "role": "1",
+    "id": "27dff73e-37f5-48e8-8712-3ed62aef6a6d",
+    "created_at": "2024-02-07T12:36:38.447Z"
   }
 ]

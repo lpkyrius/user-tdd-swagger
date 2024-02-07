@@ -5,7 +5,11 @@ interface IAddUserRequest {
     email: string;
     password: string;
     role: string;
-  };
+};
+interface ILoginUserRequest {
+    email: string;
+    password: string;
+};
 
 class UserService {
 
@@ -23,6 +27,14 @@ class UserService {
         const crypto = new Cryptography();
         password = await crypto.encrypt(password);
         return await this.userRepository.add({ email, password, role });
+    }
+
+    async login({ email, password }: ILoginUserRequest) {
+        const user: User = await this.userRepository.findUserByEmail(email)
+        const crypto = new Cryptography();
+        const loginSuccess: boolean = await crypto.decrypt(password, user.password);
+
+        return loginSuccess;
     }
 
     async update(userToUpdate: User): Promise<User> {

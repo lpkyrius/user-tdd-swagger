@@ -9,7 +9,7 @@ const mockedUsers = [
   {
     "id": "943b7681-b1c3-4244-8a37-423ae7a3d7bc",
     "email": "mary.tech@email.com",
-    "password": "$2a$10$B1KRRDrQrjL59Sq00P6Zfub9/2P50BnkOWimB1N9sOKeg/JcRcj1y",
+    "password": "$2a$10$ivVPqg7qdwZpUG6Ad566/.VpbPhCADQl3fEH8eHIlHPU.OdgwywSm",
     "role": "2",
     "created_at": "2024-01-30T11:32:34.690Z"
   }

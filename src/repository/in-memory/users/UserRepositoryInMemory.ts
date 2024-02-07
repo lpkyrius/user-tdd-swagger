@@ -22,6 +22,16 @@ class UserRepositoryInMemory implements IUserRepository {
         return newUser;
     }
 
+    async findUserByEmail(email: string): Promise<User> {
+        const users = this.readUsersFromFile();
+        const index = users.findIndex((e) => e.email === email);
+        if (index !== -1) {
+            return users[index];
+        }
+        
+        throw new Error('email not found');
+    }
+
     async update(user: User): Promise<User> {
         const users = this.readUsersFromFile();
         const index = users.findIndex((u) => u.id === user.id);

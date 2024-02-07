@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import { UserService } from "../../services/users/User.Service";
 import { User } from "../../entities/User";
 import { UserRole } from "../../repository/in-memory/UserRole";
+
+const passwordMinSize = Number(process.env.PASSWORD_MIN_SIZE || 8);
+const passwordMaxSize = Number(process.env.PASSWORD_MAX_SIZE || 100);
 class UserController {
   constructor(private userService: UserService) {}
 
@@ -10,6 +13,8 @@ class UserController {
       const { email, password, role } = req.body;
       if (!this.checkEmail(email))
         return res.status(400).json({ error: 'invalid email' });
+      if (!this.checkPassword(password))
+        return res.status(400).json({ error: `password should contain between ${ passwordMinSize } and ${ passwordMaxSize } characters` });
       if (!this.checkRole(role))
         return res.status(400).json({ error: 'invalid role' });
       if (await this.userService.emailExists(email))
@@ -87,6 +92,13 @@ class UserController {
     } catch (error: any) {
       console.error(`checkEmail Error-> ${error}`);
     } 
+  }
+
+  checkPassword(password: any) {
+    if (!password) return false; 
+    if (password.length < passwordMinSize || password.length > passwordMaxSize) return false;
+
+    return true;
   }
 
   checkRole(role: any) {

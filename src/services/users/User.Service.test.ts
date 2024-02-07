@@ -67,6 +67,18 @@ describe('#UserService', () =>{
         })
     })
 
+    describe('#LoginUser', () => {
+        it('should be able to log in with valid user and password', async () => {
+            const user = {
+                email: 'mary.tech@email.com',
+                password: 'mary.tech@123'
+            };
+            const result = await userService.login(user);
+
+            expect(result).toBeTruthy();
+        })
+    })
+
     describe('#ListUser', () => {
         let users: User[]; 
 

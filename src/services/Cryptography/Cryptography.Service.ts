@@ -9,8 +9,8 @@ class Cryptography {
     }
 
      // compares the raw password with the hash
-    async decrypt(pwd: string, hash: string): Promise<boolean> {
-        return await bcrypt.compare(pwd, hash);
+    async decrypt(loginPwd: string, hashFromUsersRepository: string): Promise<boolean> {
+        return await bcrypt.compare(loginPwd, hashFromUsersRepository);
     }
 }
 

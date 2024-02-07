@@ -57,7 +57,7 @@ if (!e2eTestEnabled) {
                 expect(response.body).toEqual({ error: 'invalid email' })
             })
 
-            test.skip('It should respond with 400 bad request + Content-Type = json for bad formatted password.', async () => {
+            test('It should respond with 400 bad request + Content-Type = json for bad formatted password.', async () => {
                 const userData: User = {
                     email: 'test.tech@email.com',
                     password: '',
@@ -69,10 +69,10 @@ if (!e2eTestEnabled) {
                     .expect('Content-Type', /json/)
                     .expect(400);
 
-                expect(response.body).toEqual({ error: 'invalid password' })
+                expect(response.body).toEqual({ error: 'password should contain between 8 and 100 characters' })
             })
 
-            test.skip('It should respond with 400 bad request + Content-Type = json for a password larger than 100.', async () => {
+            test('It should respond with 400 bad request + Content-Type = json for a password larger than 100.', async () => {
                 const repeatString: string = 'x'
                 const userData: User = {
                     email: 'test.tech@email.com',
@@ -85,7 +85,7 @@ if (!e2eTestEnabled) {
                     .expect('Content-Type', /json/)
                     .expect(400);
 
-                expect(response.body).toEqual({ error: 'invalid password' })
+                expect(response.body).toEqual({ error: 'password should contain between 8 and 100 characters' })
             })
 
             test('It should respond with 400 bad request + Content-Type = json for an existent email.', async () => {
