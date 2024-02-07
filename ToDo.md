@@ -20,8 +20,8 @@
     - [x] TDD Services - UserService
     - [x] Setting up switch mode for e2e tests using .env
     - [x] TDD add cryptography sequence for passwords *class created -> now add hash when creating a new user
-    - [ ] TDD Controller - UserService
     - [ ] TDD Router - UserService
+    - [ ] TDD Controller - UserService
     - [ ] Swagger update - add User process
 
 ##### Next phase
