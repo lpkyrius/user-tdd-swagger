@@ -1,8 +1,8 @@
 // Reference: https://editor.swagger.io/ 
 
 const task = {
-    'userId': '943b7681-b1c3-4244-8a37-423ae7a3d7bc',
-    'summary': 'Updating user laptop Zoom app.',
+    userId: '943b7681-b1c3-4244-8a37-423ae7a3d7bc',
+    summary: 'Updating user laptop Zoom app.',
 };
 
 const return200 = {
@@ -99,7 +99,6 @@ const taskAddSchema = {
     }
 };
 
-
 // tasksRouter.get('/task/list', ...
 const taskListSchema = {
     get: {
@@ -112,7 +111,6 @@ const taskListSchema = {
         } 
     }
 };
-
 
 // tasksRouter.get   ('/task/find/:id', ...
 const usersByIdSchema = {
@@ -136,7 +134,6 @@ const usersByIdSchema = {
         } 
     }
 };
-
 
 // tasksRouter.put   ('/task/update/:id', ...
 const taskUpdateSchema = {
@@ -181,8 +178,6 @@ const taskUpdateSchema = {
         } 
     }
 };
-
-
 
 // tasksRouter.delete('/task/delete/:id', async (req: Request, res: Response) => await (await taskFactory()).httpDeleteTask(req, res));
 const taskDeleteSchema = {

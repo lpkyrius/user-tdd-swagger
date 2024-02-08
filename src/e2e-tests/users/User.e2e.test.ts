@@ -290,7 +290,7 @@ if (!e2eTestEnabled) {
                     .send(userData)
                     .expect(404);
 
-                    expect(responseUpdate.body).toEqual({ })
+                    expect(responseUpdate.body).toEqual({ });
               });
         })
 

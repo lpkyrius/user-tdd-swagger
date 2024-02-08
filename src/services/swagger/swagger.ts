@@ -1,9 +1,9 @@
 import { Express, Request, Response } from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';   
 import swaggerUi from 'swagger-ui-express'; 
-import tasksRouter from '../../routes/tasks/tasks.router';
 import { version } from '../../../package.json'; 
 import { taskRouteDoc } from '../../routes/tasks/task.doc';
+import { userRouteDoc } from '../../routes/users/user.doc';
 
 require('dotenv').config();
 
@@ -37,11 +37,15 @@ const options: swaggerJsdoc.Options = {
             {
                 name: "Task",
                 description: "Task routes"
+            },
+            {
+                name: "User",
+                description: "User routes"
             }
         ],
-        paths: taskRouteDoc,
+        paths: taskRouteDoc, userRouteDoc
     },
-    apis: ['../../routes/tasks/tasks.router.ts']
+    apis: ['../../routes/tasks/tasks.router.ts', '../../routes/users/user.router.ts']
 }
 
 const swaggerSpec = swaggerJsdoc(options);
