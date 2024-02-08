@@ -164,52 +164,52 @@ const usersByIdSchema = {
 };
 
 // userRouter.put ('/user/update/:id', ...
-// const taskUpdateSchema = {
-//     put: {
-//         tags: ['User'],
-//         summary: 'Update task data',
-//         description: 'Update summary of the task',
-//         parameters: [
-//             {
-//                 name: 'id',
-//                 in: 'path',
-//                 description: 'id of the task',
-//                 type: 'string',
-//                 example: '500994c6-b51b-4544-8dfb-ccced2b87e73',
-//             },
-//         ],
-//         requestBody: {
-//             content: {
-//                 'application/json': {
-//                     schema: {
-//                         type: 'object',
-//                         properties: {
-//                             summary: {
-//                                 type: 'string',
-//                                 description: 'Summary of the task',
-//                                 example: 'Updating user laptop Zoom and Microsoft Teams apps.'
-//                             },
-//                             userId: {
-//                                 type: 'string',
-//                                 description: 'User of the task',
-//                                 example: '533b7681-b1c3-4244-8a37-423ae7a3d8ac'
-//                             },
-//                         }
-//                     }
-//                 }
-//             }
-//         },
-//         responses:{
-//             200: return200,
-//             404: return404,
-//             500: return500,
-//         } 
-//     }
-// };
+const userUpdateSchema = {
+    put: {
+        tags: ['User'],
+        summary: 'Update user data',
+        description: 'Update the user email and/or role',
+        parameters: [
+            {
+                name: 'id',
+                in: 'path',
+                description: 'id of the task',
+                type: 'string',
+                example: '943b7681-b1c3-4244-8a37-423ae7a3d7bc',
+            },
+        ],
+        requestBody: {
+            content: {
+                'application/json': {
+                    schema: {
+                        type: 'object',
+                        properties: {
+                            email: {
+                                type: 'string',
+                                description: 'User email address',
+                                example: 'mary.updated.tech@email.com'
+                            },
+                            role: {
+                                type: 'string',
+                                description: 'User role which could be 1 (for Managers) or 2 (for technicians)',
+                                example: '1'
+                            },
+                        }
+                    }
+                }
+            }
+        },
+        responses:{
+            200: return200,
+            404: return404,
+            500: return500,
+        } 
+    }
+};
 
 export const userRouteDoc = {
     '/user/add': userAddSchema,
     '/user/login': userLogin,
     '/user/find/{id}': usersByIdSchema,
-    // '/user/update/{id}': taskUpdateSchema,
+    '/user/update/{id}': userUpdateSchema,
 };
