@@ -3,8 +3,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.taskRouteDoc = void 0;
 const task = {
-    'userId': '943b7681-b1c3-4244-8a37-423ae7a3d7bc',
-    'summary': 'Updating user laptop Zoom app.',
+    userId: '943b7681-b1c3-4244-8a37-423ae7a3d7bc',
+    summary: 'Updating user laptop Zoom app.',
 };
 const return200 = {
     description: 'Success',

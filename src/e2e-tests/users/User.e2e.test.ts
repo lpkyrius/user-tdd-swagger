@@ -151,7 +151,37 @@ if (!e2eTestEnabled) {
                     .expect(200);
 
                 expect(response.body).toEqual({ message: 'success' });
-              });
+            });
+
+            test('It should respond with 400 Bad Request + Content-Type = json.', async () => {
+                const userData = {
+                    email: 'mary.tech@email.com',
+                    password: 'mary.tech@xyz'
+                };
+                const response = await request(app)
+                    .post('/user/login')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+
+                expect(response.body).toEqual({ error: 'invalid login' });
+            });
+
+            test('It should respond with 400 Bad Request + Content-Type = json.', async () => {
+                const passwordMinSize = Number(process.env.PASSWORD_MIN_SIZE || 8);
+                const passwordMaxSize = Number(process.env.PASSWORD_MAX_SIZE || 100);
+                const userData = {
+                    email: 'mary.tech@email.com',
+                    password: ''
+                };
+                const response = await request(app)
+                    .post('/user/login')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+
+                expect(response.body).toEqual({ error: `password should contain between ${ passwordMinSize } and ${ passwordMaxSize } characters` });
+            });
         })
 
         describe('Test GET /user/find/:id', () => {

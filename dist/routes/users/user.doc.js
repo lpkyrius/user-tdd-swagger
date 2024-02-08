@@ -1,71 +1,67 @@
+"use strict";
 // Reference: https://editor.swagger.io/ 
-
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userRouteDoc = void 0;
 const user = {
     email: 'matt.tech@email.com',
     password: 'matt.tech@123',
     role: '2',
 };
-
 const return200 = {
     description: 'Success',
     content: {
         'application/json': {
-            schema:{
+            schema: {
                 type: 'object',
-                example: { message: 'success'}
+                example: { message: 'success' }
             }
         }
     }
 };
-
 const return201 = {
     description: 'Success',
     content: {
         'application/json': {
-            schema:{
+            schema: {
                 type: 'object',
                 example: user
             }
         }
     }
 };
-
 const return400 = {
     description: 'Invalid',
     content: {
         'application/json': {
-            schema:{
+            schema: {
                 type: 'object',
-                example: {error: 'invalid data' }
+                example: { error: 'invalid data' }
             }
         }
     }
 };
-
 const return404 = {
     description: 'Not found',
     content: {
         'application/json': {
-            schema:{
+            schema: {
                 type: 'object',
-                example: {error: 'task not found' }
+                example: { error: 'task not found' }
             }
         }
     }
 };
-
 const return500 = {
     description: 'Internal error',
     content: {
         'application/json': {
-            schema:{
+            schema: {
                 type: 'object',
                 example: { error: 'internal error during process' }
             }
         }
     }
 };
-
 // userRouter.post('/user/add', ...
 const userAddSchema = {
     post: {
@@ -98,13 +94,12 @@ const userAddSchema = {
                 }
             }
         },
-        responses:{
+        responses: {
             201: return201,
             500: return500,
-        } 
+        }
     }
 };
-
 // userRouter.post('/user/login, ...
 const userLogin = {
     post: {
@@ -132,14 +127,13 @@ const userLogin = {
                 }
             }
         },
-        responses:{
+        responses: {
             200: return200,
             400: return400,
             500: return500,
-        } 
+        }
     }
 };
-
 // userRouter.get ('/user/find/:id', ...
 // const usersByIdSchema = {
 //     get: {
@@ -162,7 +156,6 @@ const userLogin = {
 //         } 
 //     }
 // };
-
 // userRouter.put ('/user/update/:id', ...
 // const taskUpdateSchema = {
 //     put: {
@@ -206,8 +199,7 @@ const userLogin = {
 //         } 
 //     }
 // };
-
-export const userRouteDoc = {
+exports.userRouteDoc = {
     '/user/add': userAddSchema,
     '/user/login': userLogin,
     // '/user/find/{id}': usersByIdSchema,

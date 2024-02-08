@@ -60,22 +60,28 @@ class UserController {
         }
     }
     async httpUpdateUser(req, res) {
-        // try {
-        //   const taskToUpdate: Task = req.body;
-        //   const id = req.params.id;
-        //   taskToUpdate.id = id;
-        //   if (!this.checkUserId(taskToUpdate.userId!))
-        //     return res.status(400).json({ error: 'invalid userId' });
-        //   if (!this.checkSummary(taskToUpdate.summary))
-        //     return res.status(400).json({ error: 'invalid summary' });
-        //   const task = await this.userService.update(taskToUpdate);
-        //   return res.status(200).json(task);
-        // } catch (error: any) {
-        //   if (error.message.includes('task not found')) 
-        //     return res.status(404).json({ error: 'task not found' });
-        //   console.error(`httpUpdateTask Error-> ${error}`);
-        //   res.status(500).json({error: 'error attempting to update a task'});
-        // }
+        try {
+            const id = req.params.id;
+            if (!id)
+                return res.status(400).json({ error: 'invalid id' });
+            const userToUpdate = await this.userService.findById(id);
+            if (!userToUpdate)
+                return res.status(404).json({ error: 'user not found' });
+            userToUpdate.email = req.body.email;
+            userToUpdate.role = req.body.role;
+            if (!this.checkEmail(userToUpdate.email))
+                return res.status(400).json({ error: 'invalid email' });
+            if (!this.checkRole(userToUpdate.role))
+                return res.status(400).json({ error: 'invalid role' });
+            const updatedUser = await this.userService.update(userToUpdate);
+            return res.status(200).json(updatedUser);
+        }
+        catch (error) {
+            if (error.message.includes('Id not found'))
+                return res.status(404).json({ error: 'user not found' });
+            console.error(`httpUpdateTask Error-> ${error}`);
+            res.status(500).json({ error: 'error attempting to update an user' });
+        }
     }
     checkEmail(email) {
         try {

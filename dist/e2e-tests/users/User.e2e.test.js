@@ -162,10 +162,95 @@ else {
             });
         });
         (0, globals_1.describe)('Test GET /user/update/:id', () => {
-            globals_1.test.todo('It should respond with 200 success + Content-Type = json with the updated user.');
-            globals_1.test.todo('It should respond with 400 bad request when trying to update with a bad email format.');
-            globals_1.test.todo('It should respond with 400 bad request when trying to update with an email larger than 100 characters.');
-            globals_1.test.todo('It should respond with 404 when trying to update with a id that does not exist.');
+            (0, globals_1.test)('It should respond with 200 success + Content-Type = json with the updated user.', async () => {
+                const userData = {
+                    email: 'to.update.test.tech@email.com',
+                    password: 'to.update.test.tech@123',
+                    role: '2'
+                };
+                const response = await (0, supertest_1.default)(app_1.default)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(201);
+                const userToUpdate = response.body;
+                userToUpdate.email = 'updated.test.tech@email.com';
+                const responseUpdate = await (0, supertest_1.default)(app_1.default)
+                    .put('/user/update/' + userToUpdate.id)
+                    .send(userToUpdate)
+                    .expect('Content-Type', /json/)
+                    .expect(200);
+                (0, globals_1.expect)(responseUpdate.body.email).toEqual('updated.test.tech@email.com');
+            });
+            (0, globals_1.test)('It should respond with 400 bad request when trying to update with a bad email format.', async () => {
+                const userData = {
+                    email: 'to.not.update.test.tech@email.com',
+                    password: 'to.not.update.test.tech@123',
+                    role: '2'
+                };
+                const response = await (0, supertest_1.default)(app_1.default)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(201);
+                const userToUpdate = response.body;
+                userToUpdate.email = 'should.not.update.test.techemail.com';
+                const responseUpdate = await (0, supertest_1.default)(app_1.default)
+                    .put('/user/update/' + userToUpdate.id)
+                    .send(userToUpdate)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+                (0, globals_1.expect)(responseUpdate.body).toEqual({ error: 'invalid email' });
+            });
+            (0, globals_1.test)('It should respond with 400 bad request when trying to update with an email larger than 100 characters.', async () => {
+                const userData = {
+                    email: 'to.not.update.large.test.tech@email.com',
+                    password: 'to.not.update.large.test.tech@123',
+                    role: '2'
+                };
+                const response = await (0, supertest_1.default)(app_1.default)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(201);
+                const userToUpdate = response.body;
+                let stringToRepeat = 'x';
+                stringToRepeat = stringToRepeat.repeat(90);
+                userToUpdate.email = `should.not.update.large.test.tech${stringToRepeat}@email.com`;
+                const responseUpdate = await (0, supertest_1.default)(app_1.default)
+                    .put('/user/update/' + userToUpdate.id)
+                    .send(userToUpdate)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+                (0, globals_1.expect)(responseUpdate.body).toEqual({ error: 'invalid email' });
+            });
+            (0, globals_1.test)('It should respond with 404 when trying to update with a id that does not exist.', async () => {
+                const userData = {
+                    id: 'this.id.does.not.exist',
+                    email: 'to.not.update.test.tech@email.com',
+                    password: 'to.not.update.test.tech@123',
+                    role: '2'
+                };
+                const responseUpdate = await (0, supertest_1.default)(app_1.default)
+                    .put('/user/update/' + userData.id)
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(404);
+                (0, globals_1.expect)(responseUpdate.body).toEqual({ error: 'user not found' });
+            });
+            (0, globals_1.test)('It should respond with 404 when trying to update with no id informed.', async () => {
+                const userData = {
+                    id: 'this.id.does.not.exist',
+                    email: 'to.not.update.test.tech@email.com',
+                    password: 'to.not.update.test.tech@123',
+                    role: '2'
+                };
+                const responseUpdate = await (0, supertest_1.default)(app_1.default)
+                    .put('/user/update/')
+                    .send(userData)
+                    .expect(404);
+                (0, globals_1.expect)(responseUpdate.body).toEqual({});
+            });
         });
     });
 }

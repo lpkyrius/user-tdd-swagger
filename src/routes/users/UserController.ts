@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { UserService } from "../../services/users/User.Service";
-import { User } from "../../entities/User";
 import { UserRole } from "../../repository/in-memory/UserRole";
 
 const passwordMinSize = Number(process.env.PASSWORD_MIN_SIZE || 8);
@@ -40,6 +39,7 @@ class UserController {
       if (await this.userService.login({ email, password }))
         return res.status(200).json({ message: 'success' });
 
+      return res.status(400).json({ error: 'invalid login' });
     } catch (error: any) {
       console.error(`httpAddUser Error-> ${error}`);
       res.status(500).json({error: 'error attempting to add an user'});

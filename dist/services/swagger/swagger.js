@@ -7,6 +7,7 @@ const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const package_json_1 = require("../../../package.json");
 const task_doc_1 = require("../../routes/tasks/task.doc");
+const user_doc_1 = require("../../routes/users/user.doc");
 require('dotenv').config();
 const options = {
     definition: {
@@ -38,11 +39,15 @@ const options = {
             {
                 name: "Task",
                 description: "Task routes"
+            },
+            {
+                name: "User",
+                description: "User routes"
             }
         ],
-        paths: task_doc_1.taskRouteDoc,
+        paths: { ...task_doc_1.taskRouteDoc, ...user_doc_1.userRouteDoc }
     },
-    apis: ['../../routes/tasks/tasks.router.ts']
+    apis: ['../../routes/tasks/tasks.router.ts', '../../routes/users/user.router.ts']
 };
 const swaggerSpec = (0, swagger_jsdoc_1.default)(options);
 function swaggerDocs(app, port) {
