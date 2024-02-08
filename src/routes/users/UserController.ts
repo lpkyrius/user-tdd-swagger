@@ -60,32 +60,40 @@ class UserController {
     } catch (error: any) {
       if (error.message.includes('Id not found')) 
         return res.status(404).json({ error: 'user not found' });
+      
       console.error(`httpFindTaskById Error-> ${error}`);
       res.status(500).json({error: 'error attempting to find the user'});
     }
   }
 
   async httpUpdateUser(req: Request, res: Response) {
-    // try {
-    //   const taskToUpdate: Task = req.body;
-    //   const id = req.params.id;
-    //   taskToUpdate.id = id;
+    try {
+      const id = req.params.id;
+      if (!id)
+        return res.status(400).json({ error: 'invalid id' });
 
-    //   if (!this.checkUserId(taskToUpdate.userId!))
-    //     return res.status(400).json({ error: 'invalid userId' });
-    //   if (!this.checkSummary(taskToUpdate.summary))
-    //     return res.status(400).json({ error: 'invalid summary' });
+      const userToUpdate = await this.userService.findById(id);
+      if (!userToUpdate)
+        return res.status(404).json({ error: 'user not found' });
 
-    //   const task = await this.userService.update(taskToUpdate);
+      userToUpdate.email = req.body.email;
+      userToUpdate.role = req.body.role;
+
+      if (!this.checkEmail(userToUpdate.email))
+        return res.status(400).json({ error: 'invalid email' });
+      if (!this.checkRole(userToUpdate.role))
+        return res.status(400).json({ error: 'invalid role' });
+
+      const updatedUser = await this.userService.update(userToUpdate);
       
-    //   return res.status(200).json(task);
-    // } catch (error: any) {
-    //   if (error.message.includes('task not found')) 
-    //     return res.status(404).json({ error: 'task not found' });
-    
-    //   console.error(`httpUpdateTask Error-> ${error}`);
-    //   res.status(500).json({error: 'error attempting to update a task'});
-    // }
+      return res.status(200).json(updatedUser);
+    } catch (error: any) {
+      if (error.message.includes('Id not found')) 
+        return res.status(404).json({ error: 'user not found' });
+
+      console.error(`httpUpdateTask Error-> ${error}`);
+      res.status(500).json({error: 'error attempting to update an user'});
+    }
   }
 
   checkEmail(email: any) {

@@ -54,7 +54,7 @@ if (!e2eTestEnabled) {
                     .expect('Content-Type', /json/)
                     .expect(400);
 
-                expect(response.body).toEqual({ error: 'invalid email' })
+                expect(response.body).toEqual({ error: 'invalid email' });
             })
 
             test('It should respond with 400 bad request + Content-Type = json for bad formatted password.', async () => {
@@ -69,7 +69,7 @@ if (!e2eTestEnabled) {
                     .expect('Content-Type', /json/)
                     .expect(400);
 
-                expect(response.body).toEqual({ error: 'password should contain between 8 and 100 characters' })
+                expect(response.body).toEqual({ error: 'password should contain between 8 and 100 characters' });
             })
 
             test('It should respond with 400 bad request + Content-Type = json for a password larger than 100.', async () => {
@@ -85,7 +85,7 @@ if (!e2eTestEnabled) {
                     .expect('Content-Type', /json/)
                     .expect(400);
 
-                expect(response.body).toEqual({ error: 'password should contain between 8 and 100 characters' })
+                expect(response.body).toEqual({ error: 'password should contain between 8 and 100 characters' });
             })
 
             test('It should respond with 400 bad request + Content-Type = json for an existent email.', async () => {
@@ -108,7 +108,7 @@ if (!e2eTestEnabled) {
                     .expect('Content-Type', /json/)
                     .expect(400);
 
-                expect(responseError.body).toEqual({ error: 'email already exists' })
+                expect(responseError.body).toEqual({ error: 'email already exists' });
             })
 
             test('It should respond with 400 bad request + Content-Type = json for bad formatted role (!1 or !2).', async () => {
@@ -123,7 +123,7 @@ if (!e2eTestEnabled) {
                     .expect('Content-Type', /json/)
                     .expect(400);
 
-                expect(response.body).toEqual({ error: 'invalid role' })
+                expect(response.body).toEqual({ error: 'invalid role' });
             })
             
             test('It should respond with 400 bad request + Content-Type = json for bad formatted user.', async () => {
@@ -134,7 +134,7 @@ if (!e2eTestEnabled) {
                     .expect('Content-Type', /json/)
                     .expect(400);
 
-                expect(response.body).toEqual({ error: 'invalid email' })
+                expect(response.body).toEqual({ error: 'invalid email' });
             })
         })
 
@@ -187,13 +187,111 @@ if (!e2eTestEnabled) {
         })
 
         describe('Test GET /user/update/:id', () => {
-            test.todo('It should respond with 200 success + Content-Type = json with the updated user.')
+            test('It should respond with 200 success + Content-Type = json with the updated user.', async () => {
+                const userData: User = {
+                    email: 'to.update.test.tech@email.com',
+                    password: 'to.update.test.tech@123',
+                    role: '2'
+                };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(201);
+        
+                const userToUpdate: User = response.body;
+                userToUpdate.email = 'updated.test.tech@email.com';
+                
+                const responseUpdate = await request(app)
+                    .put('/user/update/'+ userToUpdate.id)
+                    .send(userToUpdate)
+                    .expect('Content-Type', /json/)
+                    .expect(200);
+        
+                    expect(responseUpdate.body.email).toEqual('updated.test.tech@email.com');
+              });
             
-            test.todo('It should respond with 400 bad request when trying to update with a bad email format.')
+            test('It should respond with 400 bad request when trying to update with a bad email format.', async () => {
+                const userData: User = {
+                    email: 'to.not.update.test.tech@email.com',
+                    password: 'to.not.update.test.tech@123',
+                    role: '2'
+                };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(201);
+        
+                const userToUpdate: User = response.body;
+                userToUpdate.email = 'should.not.update.test.techemail.com';
+                
+                const responseUpdate = await request(app)
+                    .put('/user/update/'+ userToUpdate.id)
+                    .send(userToUpdate)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+        
+                    expect(responseUpdate.body).toEqual({ error: 'invalid email' })
+              });
             
-            test.todo('It should respond with 400 bad request when trying to update with an email larger than 100 characters.')
+            test('It should respond with 400 bad request when trying to update with an email larger than 100 characters.', async () => {
+                const userData: User = {
+                    email: 'to.not.update.large.test.tech@email.com',
+                    password: 'to.not.update.large.test.tech@123',
+                    role: '2'
+                };
+                const response = await request(app)
+                    .post('/user/add')
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(201);
+        
+                const userToUpdate: User = response.body;
+                let stringToRepeat: string = 'x'
+                stringToRepeat = stringToRepeat.repeat(90)
+                userToUpdate.email = `should.not.update.large.test.tech${ stringToRepeat }@email.com`;
+                const responseUpdate = await request(app)
+                    .put('/user/update/'+ userToUpdate.id)
+                    .send(userToUpdate)
+                    .expect('Content-Type', /json/)
+                    .expect(400);
+
+                    expect(responseUpdate.body).toEqual({ error: 'invalid email' })
+              });
             
-            test.todo('It should respond with 404 when trying to update with a id that does not exist.')
+            test('It should respond with 404 when trying to update with a id that does not exist.', async () => {
+                const userData: User = {
+                    id: 'this.id.does.not.exist',
+                    email: 'to.not.update.test.tech@email.com',
+                    password: 'to.not.update.test.tech@123',
+                    role: '2'
+                };
+                
+                const responseUpdate = await request(app)
+                    .put('/user/update/'+ userData.id)
+                    .send(userData)
+                    .expect('Content-Type', /json/)
+                    .expect(404);
+
+                    expect(responseUpdate.body).toEqual({ error: 'user not found' })
+              });
+
+              test('It should respond with 404 when trying to update with no id informed.', async () => {
+                const userData: User = {
+                    id: 'this.id.does.not.exist',
+                    email: 'to.not.update.test.tech@email.com',
+                    password: 'to.not.update.test.tech@123',
+                    role: '2'
+                };
+                
+                const responseUpdate = await request(app)
+                    .put('/user/update/')
+                    .send(userData)
+                    .expect(404);
+
+                    expect(responseUpdate.body).toEqual({ })
+              });
         })
 
     })
