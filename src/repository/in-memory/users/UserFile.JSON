@@ -68,5 +68,12 @@
     "role": "2",
     "id": "c89a4cdc-d1e8-457e-8e0e-78f80b2c6622",
     "created_at": "2024-02-08T17:18:28.630Z"
+  },
+  {
+    "email": "matt.tech@email.com",
+    "password": "$2a$10$vMNLI/AxMT3dTRe/1pzw3.3JJrvBbbpD4g/aDpZqNkV8cvPHhXdcu",
+    "role": "2",
+    "id": "4a25788f-a575-4e69-9677-2cfaa3d0e115",
+    "created_at": "2024-02-08T17:54:12.578Z"
   }
 ]

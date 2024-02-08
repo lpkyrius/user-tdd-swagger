@@ -43,7 +43,7 @@ const options: swaggerJsdoc.Options = {
                 description: "User routes"
             }
         ],
-        paths: taskRouteDoc, userRouteDoc
+        paths: { ...taskRouteDoc, ...userRouteDoc }
     },
     apis: ['../../routes/tasks/tasks.router.ts', '../../routes/users/user.router.ts']
 }
