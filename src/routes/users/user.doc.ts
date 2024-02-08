@@ -141,27 +141,27 @@ const userLogin = {
 };
 
 // userRouter.get ('/user/find/:id', ...
-// const usersByIdSchema = {
-//     get: {
-//         tags: ['User'],
-//         summary: 'Get task from query id',
-//         description: 'Get task by its id',
-//         parameters: [
-//             {
-//                 name: 'id',
-//                 in: 'path',
-//                 description: 'id of the task',
-//                 type: 'string',
-//                 example: '500994c6-b51b-4544-8dfb-ccced2b87e73',
-//             },
-//         ],
-//         responses:{
-//             200: return200,
-//             404: return404,
-//             500: return500,
-//         } 
-//     }
-// };
+const usersByIdSchema = {
+    get: {
+        tags: ['User'],
+        summary: 'Get user from query id',
+        description: 'Get user by its id',
+        parameters: [
+            {
+                name: 'id',
+                in: 'path',
+                description: 'id of the user',
+                type: 'string',
+                example: '533b7681-b1c3-4244-8a37-423ae7a3d8ac',
+            },
+        ],
+        responses:{
+            200: return200,
+            404: return404,
+            500: return500,
+        } 
+    }
+};
 
 // userRouter.put ('/user/update/:id', ...
 // const taskUpdateSchema = {
@@ -210,6 +210,6 @@ const userLogin = {
 export const userRouteDoc = {
     '/user/add': userAddSchema,
     '/user/login': userLogin,
-    // '/user/find/{id}': usersByIdSchema,
+    '/user/find/{id}': usersByIdSchema,
     // '/user/update/{id}': taskUpdateSchema,
 };
