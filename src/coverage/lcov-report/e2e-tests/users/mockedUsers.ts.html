@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for routes/tasks/tasks.router.ts</title>
+    <title>Code coverage report for e2e-tests/users/mockedUsers.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">routes/tasks</a> tasks.router.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">e2e-tests/users</a> mockedUsers.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -78,37 +78,43 @@
 <a name='L13'></a><a href='#L13'>13</a>
 <a name='L14'></a><a href='#L14'>14</a>
 <a name='L15'></a><a href='#L15'>15</a>
-<a name='L16'></a><a href='#L16'>16</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { Router, Request, Response } from 'express';
-import TaskFactory from '../../factory/TaskFactory';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const mockedUsers = [
+  {
+    "id": "533b7681-b1c3-4244-8a37-423ae7a3d8ac",
+    "email": "john.manager@email.com",
+    "password": "$2a$10$Vyu.KpCEqyiRQV1iiJLD4OBuYd598E9kFUDo.HDwZfQTaixyR1MSK",
+    "role": "1",
+    "created_at": "2023-12-24T16:17:18.622Z"
+  },
+  {
+    "id": "943b7681-b1c3-4244-8a37-423ae7a3d7bc",
+    "email": "mary.tech@email.com",
+    "password": "$2a$10$ivVPqg7qdwZpUG6Ad566/.VpbPhCADQl3fEH8eHIlHPU.OdgwywSm",
+    "role": "2",
+    "created_at": "2024-01-30T11:32:34.690Z"
+  }
+]
 &nbsp;
-const tasksRouter = Router();
-&nbsp;
-const taskFactory = async () =&gt; {
-    return await TaskFactory.createInstance();
-}
-&nbsp;
-tasksRouter.post('/task/add', async (req: Request, res: Response) =&gt; await (await taskFactory()).httpAddTask(req, res));
-tasksRouter.get('/task/list', async (req: Request, res: Response) =&gt; await (await taskFactory()).httpListTasks(req, res));
-tasksRouter.get   ('/task/find/:id'  , async (req: Request, res: Response) =&gt; await (await taskFactory()).httpFindTaskById(req, res));
-tasksRouter.put   ('/task/update/:id', async (req: Request, res: Response) =&gt; await (await taskFactory()).httpUpdateTask(req, res));
-tasksRouter.delete('/task/delete/:id', async (req: Request, res: Response) =&gt; await (await taskFactory()).httpDeleteTask(req, res));
-&nbsp;
-export default tasksRouter;</pre></td></tr></table></pre>
+export { mockedUsers }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

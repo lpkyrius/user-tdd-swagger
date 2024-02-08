@@ -22,18 +22,4 @@
     - [x] TDD add cryptography sequence for passwords *class created -> now add hash when creating a new user
     - [x] TDD Router - UserService
     - [x] TDD Controller - UserService
-    - [ ] Swagger update - add User process
-
-##### Next phase
-
-> ⭐️ Save the UUID keys in database as binary type
-
-- [ ] Persist data with MySQL
-    - Knex migrations;
-    - Factory following the new persist repository;
-    - Create the persistent repository only with the methods signature;
-    - TDD is already done since I made it for in-memory repository;
-
-##### Next phase
-
-- [ ] Integrate Users authentication (JWT) for Tasks management;
+    - [x] Swagger update - add User process
